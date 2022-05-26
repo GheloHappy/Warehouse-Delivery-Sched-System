@@ -48,6 +48,8 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             conOpenShip = "server=" + "mdiserver" + ";user id=" + "sa" + ";password=" + "Passw0rd" + ";database=" + "dbOpenShippers";
             connOS = new SqlConnection(conOpenShip);
+
+            Class.GlobalVars.strCompany = company;
         }
 
         SqlDataAdapter sda;
@@ -74,22 +76,37 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             return false;
         }
-
-        public void fillDGVSched(GUI.frmDelSched delSched)
+        public DataTable fillDGVSched()
         {
             connSL.Open();
 
-            sda = new SqlDataAdapter("SELECT * FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL", connSL);
+            sda = new SqlDataAdapter("SELECT * FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
             dt = new DataTable(); 
             sda.Fill(dt);
 
-            delSched.dgvSched.DataSource = dt;
-
             connSL.Close();
+
+            return dt;
+        }
+
+        public void fillcmbCity(ComboBox cmbCity)
+        {
+            connOS.Open();
+
+            sda = new SqlDataAdapter("SELECT DISTINCT CITY FROM a_Whse_Delivery_Sched_sys WHERE CITY IS NOT NULL AND CITY != '' AND InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                cmbCity.Items.Add(row["CITY"].ToString());
+            }
+
+            connOS.Close();
         }
 
 
-        public void fillcmbDT(GUI.frmDelSched delSched)
+        public void fillcmbDT(ComboBox cmbDT)
         {
             connOS.Open();
 
@@ -99,10 +116,51 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             foreach (DataRow row in dt.Rows)
             {
-                delSched.cmbDT.Items.Add(row["ShipViaID"].ToString());
+                cmbDT.Items.Add(row["ShipViaID"].ToString());
             }
 
             connOS.Close();
+        }
+
+        string shipDesc;
+
+        public string showLblDT(string shipvia)
+        {
+
+            connOS.Open();
+
+            sda = new SqlDataAdapter("SELECT Description FROM shipvia WHERE ShipViaID = '" + shipvia + "' ", connOS);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                shipDesc = row["Description"].ToString();
+            }
+
+            connOS.Close();
+
+            return shipDesc;
+        }
+
+        public DataTable filterDGVSched(string city)
+        {
+            if (city == "")
+            {
+                fillDGVSched();
+            }
+            else
+            {
+                connSL.Open();
+
+                sda = new SqlDataAdapter("SELECT * FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + city + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
+                dt = new DataTable();
+                sda.Fill(dt);
+
+                connSL.Close(); 
+            }
+
+            return dt;
         }
     }
 }

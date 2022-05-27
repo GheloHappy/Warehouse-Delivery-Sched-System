@@ -26,11 +26,13 @@ namespace Warehouse_Delivery_Sched_System.Class
         public void sqlCon(string company)
         {
 
-            if (company == "Monheim") {
+            if (company == "Monheim")
+            {
                 serverName = "mdiserver";
                 dbName = "MONHEIMAPP";
             }
-            else if(company == "Maryland" || company == "Rheinland") {
+            else if (company == "Maryland" || company == "Rheinland")
+            {
                 serverName = "solomon";
                 dbName = "MLDIAPP";
             }
@@ -54,8 +56,9 @@ namespace Warehouse_Delivery_Sched_System.Class
 
         SqlDataAdapter sda;
         DataTable dt;
-        //SqlCommand cmd;
+        SqlCommand cmd;
 
+        //--------------------------------------------------------MDISERVER-L - WhseSchedDelSys - TBLOGIN---------------------------------------------------------------
         public bool loginVal(string usr, string pass)
         {
             conn.Open();
@@ -76,16 +79,27 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             return false;
         }
-        public DataTable fillDGVSched()
+
+        //--------------------------------------------------------MDISERVER - MONHEIMAPP - a_Whse_Delivery_Sched_sys-------------------------------------------------------
+        public DataTable filterDGVSched(string city, bool isFiltered)
         {
             connSL.Open();
 
-            sda = new SqlDataAdapter("SELECT * FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
-            dt = new DataTable(); 
-            sda.Fill(dt);
+            if (isFiltered == false || city == "")
+            {
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
+                dt = new DataTable();
+                sda.Fill(dt);
+            }
+            else
+            {
+
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + city + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
+                dt = new DataTable();
+                sda.Fill(dt);
+            }
 
             connSL.Close();
-
             return dt;
         }
 
@@ -105,7 +119,7 @@ namespace Warehouse_Delivery_Sched_System.Class
             connOS.Close();
         }
 
-
+        //--------------------------------------------------------MDISERVER - dbOpenShippers - shipvia------------------------------------------------------------------
         public void fillcmbDT(ComboBox cmbDT)
         {
             connOS.Open();
@@ -143,24 +157,68 @@ namespace Warehouse_Delivery_Sched_System.Class
             return shipDesc;
         }
 
-        public DataTable filterDGVSched(string city)
+        //--------------------------------------------------------MDISERVER-L - WhseSchedDelSys - TempInsertTable---------------------------------------------------------------
+        public void clearTemp()
         {
-            if (city == "")
+            conn.Open();
+            cmd = new SqlCommand("DELETE FROM TempInsertTable", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        int toggle;
+
+        public bool insertToTempTbl(string invcNbr, string shipName, double amt)
+        {
+            conn.Open();
+
+            toggle = 0;
+
+            sda = new SqlDataAdapter("SELECT InvcNbr from TempInsertTable WHERE InvcNbr = '" + invcNbr + "'", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            if (dt.Rows.Count != 0)
             {
-                fillDGVSched();
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (row != null)
+                    {
+                        conn.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        toggle = 1;
+                    }
+                }
             }
             else
             {
-                connSL.Open();
-
-                sda = new SqlDataAdapter("SELECT * FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + city + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
-                dt = new DataTable();
-                sda.Fill(dt);
-
-                connSL.Close(); 
+                toggle = 1;
             }
 
-            return dt;
+            if (toggle == 1)
+            {
+                using (cmd = new SqlCommand("INSERT INTO TempInsertTable VALUES(@invcNbr,@shipName,@amt)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
+                    cmd.Parameters.AddWithValue("@shipName", shipName);
+                    cmd.Parameters.AddWithValue("@amt", amt);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            conn.Close();
+            return false;
         }
+
+        public void deleteTempInvcID(string invcNbr)
+        {
+            conn.Open();
+            cmd = new SqlCommand("DELETE FROM TempInsertTable WHERE InvcNbr = '"+ invcNbr +"'", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
     }
 }

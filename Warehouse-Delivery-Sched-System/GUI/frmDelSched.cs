@@ -24,7 +24,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
             lblCompany.Text = Class.GlobalVars.strCompany;
 
+            con.clearTemp();
+
             dgvLoad();
+            dgvSched.DataSource = con.filterDGVSched("",false);           
+
             cmbLoad();
         }
 
@@ -33,32 +37,39 @@ namespace Warehouse_Delivery_Sched_System.GUI
             lblDT.Text = con.showLblDT(cmbDT.Text);
         }
 
+        DataGridViewCheckBoxColumn schedCol = new DataGridViewCheckBoxColumn();
         private void dgvLoad()
         {
-            DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
-            dgvSched.Columns.Add(col);
-            dgvSched.DataSource = con.fillDGVSched();
-            dgvSched.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvSched.DataSource = null;
+            dgvSched.Rows.Clear();
+            dgvSched.Columns.Clear();       
+            dgvSched.Columns.Add(schedCol); 
         }
 
         private void cmbLoad()
         {
             con.fillcmbCity(cmbCity);
             con.fillcmbDT(cmbDT);
+
+            dgvSched.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSched.Columns[4].DefaultCellStyle.Format = "N2";
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            dgvSched.DataSource = con.filterDGVSched(cmbCity.Text);
+            dgvLoad();
+
+            dgvSched.DataSource = con.filterDGVSched("",false);
+            cmbCity.SelectedIndex = -1;
+
+            chkbSelectAll.Checked = false;
         }
 
         private void btnADD_Click(object sender, EventArgs e)
         {
             chkDGV();
-            double total = dgvInsertDel.Rows.Cast<DataGridViewRow>()
-                .Sum(t => Convert.ToDouble(t.Cells[2].Value));
 
-            lblSum.Text = total.ToString("C2");
+            updateTotal();
 
             dgvSched.FirstDisplayedCell = null;
             dgvSched.ClearSelection();
@@ -67,31 +78,26 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             foreach (DataGridViewRow row in dgvSched.Rows)
             {
-                DataGridViewCheckBoxCell cell = row.Cells[0] as DataGridViewCheckBoxCell;
-                DataGridViewCell cellInvc = row.Cells[1];
-                DataGridViewCell cellShipID = row.Cells[4];
-                DataGridViewCell cellAmt = row.Cells[7];
+                DataGridViewCheckBoxCell cell = row.Cells[0] as DataGridViewCheckBoxCell;                
 
                 if (cell.Value != null)
                 {
-                    //if (dgvInsertDel.Rows.Count == 0)
-                    //{
-                        dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
-                    //}
-                    //else
-                    //{
-                        //Need to change to sql for proper checking
-                        //foreach (DataGridViewRow rowIns in dgvInsertDel.Rows)
-                        //{
-                        //    DataGridViewCell cellInsInvc = rowIns.Cells[1];
+                    if(Convert.ToBoolean(cell.Value) == true)
+                    {
+                        DataGridViewCell cellInvc = row.Cells[1];
+                        DataGridViewCell cellShipID = row.Cells[2];
+                        DataGridViewCell cellAmt = row.Cells[4];
 
-                        //    if (cellInsInvc.Value != cellInvc.Value)
-                        //    {   
-                        //        dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
-                        //    }
-
-                        //}
-                    //}                
+                        if (con.insertToTempTbl(cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value)) == true)
+                        {
+                            MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already added.");
+                        }
+                        else
+                        {
+                            dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
+                            dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
+                        }
+                    }                    
                 }
 
             }
@@ -100,6 +106,53 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void frmDelSched_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void cmbCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvLoad();
+            dgvSched.DataSource = con.filterDGVSched(cmbCity.Text, true);
+            dgvSched.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSched.Columns[4].DefaultCellStyle.Format = "N2";
+        }
+
+        private void dgvInsertDel_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvInsertDel.SelectedRows)
+            {            
+                con.deleteTempInvcID(row.Cells[1].Value.ToString());             
+            }
+        }
+
+        private void chkbSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbSelectAll.Checked)
+            {
+                foreach (DataGridViewRow row in this.dgvSched.Rows)
+                {
+                    row.Cells[0].Value = row.Cells[0].Value = false ? true : true;
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in this.dgvSched.Rows)
+                {
+                    row.Cells[0].Value = row.Cells[0].Value = false ? true : false;
+                }
+            }
+        }
+
+        private void updateTotal()
+        {
+            double total = dgvInsertDel.Rows.Cast<DataGridViewRow>()
+                .Sum(t => Convert.ToDouble(t.Cells[2].Value));
+
+            lblSum.Text = total.ToString("C2");
+        }
+
+        private void dgvInsertDel_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            updateTotal();
         }
     }
 }

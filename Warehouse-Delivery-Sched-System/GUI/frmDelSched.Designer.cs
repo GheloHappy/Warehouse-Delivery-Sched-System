@@ -39,12 +39,13 @@
             this.lblCompany = new System.Windows.Forms.Label();
             this.btnFilter = new System.Windows.Forms.Button();
             this.dgvInsertDel = new System.Windows.Forms.DataGridView();
-            this.btnADD = new System.Windows.Forms.Button();
             this.shipName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invcNbr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnADD = new System.Windows.Forms.Button();
             this.lblSum = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkbSelectAll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +83,7 @@
             this.cmbDT.Location = new System.Drawing.Point(10, 352);
             this.cmbDT.Name = "cmbDT";
             this.cmbDT.Size = new System.Drawing.Size(164, 32);
-            this.cmbDT.TabIndex = 1;
+            this.cmbDT.TabIndex = 4;
             this.cmbDT.SelectedIndexChanged += new System.EventHandler(this.cmbDT_SelectedIndexChanged);
             // 
             // lblDT
@@ -103,17 +104,18 @@
             this.cmbCity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCity.FormattingEnabled = true;
-            this.cmbCity.Location = new System.Drawing.Point(74, 15);
+            this.cmbCity.Location = new System.Drawing.Point(152, 15);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(164, 32);
-            this.cmbCity.TabIndex = 3;
+            this.cmbCity.TabIndex = 1;
+            this.cmbCity.SelectedIndexChanged += new System.EventHandler(this.cmbCity_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.Location = new System.Drawing.Point(90, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 24);
             this.label1.TabIndex = 4;
@@ -136,11 +138,11 @@
             // 
             this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.Red;
-            this.btnFilter.Location = new System.Drawing.Point(267, 14);
+            this.btnFilter.Location = new System.Drawing.Point(443, 15);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(93, 35);
-            this.btnFilter.TabIndex = 6;
-            this.btnFilter.Text = "FILTER";
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Clear";
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
@@ -168,18 +170,8 @@
             this.dgvInsertDel.ReadOnly = true;
             this.dgvInsertDel.Size = new System.Drawing.Size(584, 302);
             this.dgvInsertDel.TabIndex = 7;
-            // 
-            // btnADD
-            // 
-            this.btnADD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnADD.ForeColor = System.Drawing.Color.Green;
-            this.btnADD.Location = new System.Drawing.Point(377, 14);
-            this.btnADD.Name = "btnADD";
-            this.btnADD.Size = new System.Drawing.Size(93, 35);
-            this.btnADD.TabIndex = 8;
-            this.btnADD.Text = "ADD";
-            this.btnADD.UseVisualStyleBackColor = true;
-            this.btnADD.Click += new System.EventHandler(this.btnADD_Click);
+            this.dgvInsertDel.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvInsertDel_UserDeletedRow);
+            this.dgvInsertDel.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvInsertDel_UserDeletingRow);
             // 
             // shipName
             // 
@@ -199,6 +191,18 @@
             this.Amount.Name = "Amount";
             this.Amount.ReadOnly = true;
             // 
+            // btnADD
+            // 
+            this.btnADD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnADD.ForeColor = System.Drawing.Color.Green;
+            this.btnADD.Location = new System.Drawing.Point(331, 14);
+            this.btnADD.Name = "btnADD";
+            this.btnADD.Size = new System.Drawing.Size(93, 35);
+            this.btnADD.TabIndex = 2;
+            this.btnADD.Text = "ADD";
+            this.btnADD.UseVisualStyleBackColor = true;
+            this.btnADD.Click += new System.EventHandler(this.btnADD_Click);
+            // 
             // lblSum
             // 
             this.lblSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -208,9 +212,9 @@
             this.lblSum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.lblSum.Location = new System.Drawing.Point(731, 7);
             this.lblSum.Name = "lblSum";
-            this.lblSum.Size = new System.Drawing.Size(81, 42);
+            this.lblSum.Size = new System.Drawing.Size(91, 42);
             this.lblSum.TabIndex = 9;
-            this.lblSum.Text = "000";
+            this.lblSum.Text = "0.00";
             // 
             // label2
             // 
@@ -224,12 +228,25 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "TOTAL:";
             // 
+            // chkbSelectAll
+            // 
+            this.chkbSelectAll.AutoSize = true;
+            this.chkbSelectAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkbSelectAll.Location = new System.Drawing.Point(12, 20);
+            this.chkbSelectAll.Name = "chkbSelectAll";
+            this.chkbSelectAll.Size = new System.Drawing.Size(48, 24);
+            this.chkbSelectAll.TabIndex = 11;
+            this.chkbSelectAll.Text = "All";
+            this.chkbSelectAll.UseVisualStyleBackColor = true;
+            this.chkbSelectAll.CheckedChanged += new System.EventHandler(this.chkbSelectAll_CheckedChanged);
+            // 
             // frmDelSched
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1201, 656);
+            this.Controls.Add(this.chkbSelectAll);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblSum);
             this.Controls.Add(this.btnADD);
@@ -270,5 +287,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         public System.Windows.Forms.Label lblSum;
         public System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkbSelectAll;
     }
 }

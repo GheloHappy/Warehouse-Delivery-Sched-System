@@ -46,6 +46,8 @@
             this.lblSum = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkbSelectAll = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblOutCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -104,7 +106,7 @@
             this.cmbCity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCity.FormattingEnabled = true;
-            this.cmbCity.Location = new System.Drawing.Point(152, 15);
+            this.cmbCity.Location = new System.Drawing.Point(162, 12);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(164, 32);
             this.cmbCity.TabIndex = 1;
@@ -115,7 +117,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(90, 18);
+            this.label1.Location = new System.Drawing.Point(100, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 24);
             this.label1.TabIndex = 4;
@@ -126,11 +128,11 @@
             this.lblCompany.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCompany.AutoSize = true;
             this.lblCompany.BackColor = System.Drawing.Color.White;
-            this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.ForeColor = System.Drawing.Color.Red;
-            this.lblCompany.Location = new System.Drawing.Point(1041, 15);
+            this.lblCompany.Location = new System.Drawing.Point(1071, 15);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(148, 29);
+            this.lblCompany.Size = new System.Drawing.Size(118, 24);
             this.lblCompany.TabIndex = 5;
             this.lblCompany.Text = "COMPANY:";
             // 
@@ -138,7 +140,7 @@
             // 
             this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.Red;
-            this.btnFilter.Location = new System.Drawing.Point(443, 15);
+            this.btnFilter.Location = new System.Drawing.Point(446, 11);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(93, 35);
             this.btnFilter.TabIndex = 3;
@@ -195,7 +197,7 @@
             // 
             this.btnADD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnADD.ForeColor = System.Drawing.Color.Green;
-            this.btnADD.Location = new System.Drawing.Point(331, 14);
+            this.btnADD.Location = new System.Drawing.Point(332, 11);
             this.btnADD.Name = "btnADD";
             this.btnADD.Size = new System.Drawing.Size(93, 35);
             this.btnADD.TabIndex = 2;
@@ -210,7 +212,7 @@
             this.lblSum.BackColor = System.Drawing.Color.Transparent;
             this.lblSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblSum.Location = new System.Drawing.Point(731, 7);
+            this.lblSum.Location = new System.Drawing.Point(804, 7);
             this.lblSum.Name = "lblSum";
             this.lblSum.Size = new System.Drawing.Size(91, 42);
             this.lblSum.TabIndex = 9;
@@ -222,7 +224,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(648, 18);
+            this.label2.Location = new System.Drawing.Point(721, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 24);
             this.label2.TabIndex = 10;
@@ -232,7 +234,7 @@
             // 
             this.chkbSelectAll.AutoSize = true;
             this.chkbSelectAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkbSelectAll.Location = new System.Drawing.Point(12, 20);
+            this.chkbSelectAll.Location = new System.Drawing.Point(37, 17);
             this.chkbSelectAll.Name = "chkbSelectAll";
             this.chkbSelectAll.Size = new System.Drawing.Size(48, 24);
             this.chkbSelectAll.TabIndex = 11;
@@ -240,12 +242,39 @@
             this.chkbSelectAll.UseVisualStyleBackColor = true;
             this.chkbSelectAll.CheckedChanged += new System.EventHandler(this.chkbSelectAll_CheckedChanged);
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(568, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 24);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "OUTLET:";
+            // 
+            // lblOutCount
+            // 
+            this.lblOutCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOutCount.AutoSize = true;
+            this.lblOutCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblOutCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblOutCount.Location = new System.Drawing.Point(664, 7);
+            this.lblOutCount.Name = "lblOutCount";
+            this.lblOutCount.Size = new System.Drawing.Size(39, 42);
+            this.lblOutCount.TabIndex = 12;
+            this.lblOutCount.Text = "0";
+            // 
             // frmDelSched
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1201, 656);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblOutCount);
             this.Controls.Add(this.chkbSelectAll);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblSum);
@@ -288,5 +317,7 @@
         public System.Windows.Forms.Label lblSum;
         public System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkbSelectAll;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label lblOutCount;
     }
 }

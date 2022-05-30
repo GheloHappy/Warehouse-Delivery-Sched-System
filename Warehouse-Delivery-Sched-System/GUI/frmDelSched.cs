@@ -51,8 +51,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.fillcmbCity(cmbCity);
             con.fillcmbDT(cmbDT);
 
-            dgvSched.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSched.Columns[4].DefaultCellStyle.Format = "N2";
+            columnFormat();
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -63,16 +62,19 @@ namespace Warehouse_Delivery_Sched_System.GUI
             cmbCity.SelectedIndex = -1;
 
             chkbSelectAll.Checked = false;
+
+            columnFormat();
         }
 
         private void btnADD_Click(object sender, EventArgs e)
         {
             chkDGV();
 
+            updateOutletCount();
+
             updateTotal();
 
-            dgvSched.FirstDisplayedCell = null;
-            dgvSched.ClearSelection();
+            clearCheckedDGv();
         }
         private void chkDGV()
         {
@@ -95,7 +97,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
                         else
                         {
                             dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
-                            dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
+                            columnFormat();
                         }
                     }                    
                 }
@@ -112,8 +114,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             dgvLoad();
             dgvSched.DataSource = con.filterDGVSched(cmbCity.Text, true);
-            dgvSched.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSched.Columns[4].DefaultCellStyle.Format = "N2";
+            columnFormat();
         }
 
         private void dgvInsertDel_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -122,6 +123,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
             {            
                 con.deleteTempInvcID(row.Cells[1].Value.ToString());             
             }
+        }
+        private void dgvInsertDel_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            updateTotal();
+            updateOutletCount();
         }
 
         private void chkbSelectAll_CheckedChanged(object sender, EventArgs e)
@@ -135,11 +141,24 @@ namespace Warehouse_Delivery_Sched_System.GUI
             }
             else
             {
-                foreach (DataGridViewRow row in this.dgvSched.Rows)
-                {
-                    row.Cells[0].Value = row.Cells[0].Value = false ? true : false;
-                }
+                clearCheckedDGv();
             }
+        }
+
+        private void clearCheckedDGv()
+        {
+            foreach (DataGridViewRow row in this.dgvSched.Rows)
+            {
+                row.Cells[0].Value = row.Cells[0].Value = false ? true : false;
+            }
+
+            chkbSelectAll.Checked = false;
+        }
+
+        private void columnFormat()
+        {
+            dgvSched.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSched.Columns[4].DefaultCellStyle.Format = "N2";
         }
 
         private void updateTotal()
@@ -147,12 +166,23 @@ namespace Warehouse_Delivery_Sched_System.GUI
             double total = dgvInsertDel.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDouble(t.Cells[2].Value));
 
-            lblSum.Text = total.ToString("C2");
+            lblSum.Text = total.ToString("C2");     
         }
 
-        private void dgvInsertDel_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        private void updateOutletCount()
         {
-            updateTotal();
+            lblOutCount.Text = con.outletCount().ToString();
+
+            if (Convert.ToInt32(lblOutCount.Text) >= 5)
+            {
+                lblOutCount.ForeColor = Color.Red;
+
+                //MessageBox.Show("You are exceeding the maximum Outlet Count of 4.", "Warning!",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                lblOutCount.ForeColor = Color.YellowGreen;
+            }      
         }
     }
 }

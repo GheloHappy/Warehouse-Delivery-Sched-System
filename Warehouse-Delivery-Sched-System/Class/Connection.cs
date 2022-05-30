@@ -220,5 +220,26 @@ namespace Warehouse_Delivery_Sched_System.Class
             conn.Close();
         }
 
+        //count outlet
+        int outCount;
+        public int outletCount()
+        {
+            outCount = 0;
+
+            conn.Open();
+
+            sda = new SqlDataAdapter("SELECT DISTINCT SHIPNAME FROM tempInsertTable", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                outCount++;
+            }
+
+            conn.Close();
+            return outCount;
+        }
+
     }
 }

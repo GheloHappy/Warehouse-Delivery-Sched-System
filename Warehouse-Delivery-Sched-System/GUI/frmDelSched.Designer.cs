@@ -48,6 +48,11 @@
             this.chkbSelectAll = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblOutCount = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtSchedDate = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnViewSum = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +87,7 @@
             this.cmbDT.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDT.FormattingEnabled = true;
-            this.cmbDT.Location = new System.Drawing.Point(10, 352);
+            this.cmbDT.Location = new System.Drawing.Point(79, 384);
             this.cmbDT.Name = "cmbDT";
             this.cmbDT.Size = new System.Drawing.Size(164, 32);
             this.cmbDT.TabIndex = 4;
@@ -93,12 +98,12 @@
             this.lblDT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDT.AutoSize = true;
             this.lblDT.BackColor = System.Drawing.Color.White;
-            this.lblDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDT.Location = new System.Drawing.Point(197, 355);
+            this.lblDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDT.Location = new System.Drawing.Point(75, 357);
             this.lblDT.Name = "lblDT";
-            this.lblDT.Size = new System.Drawing.Size(109, 24);
+            this.lblDT.Size = new System.Drawing.Size(52, 24);
             this.lblDT.TabIndex = 2;
-            this.lblDT.Text = "Description:";
+            this.lblDT.Text = ".......";
             // 
             // cmbCity
             // 
@@ -151,7 +156,8 @@
             // dgvInsertDel
             // 
             this.dgvInsertDel.AllowUserToAddRows = false;
-            this.dgvInsertDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvInsertDel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvInsertDel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvInsertDel.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvInsertDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -167,10 +173,10 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvInsertDel.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvInsertDel.Location = new System.Drawing.Point(605, 342);
+            this.dgvInsertDel.Location = new System.Drawing.Point(414, 342);
             this.dgvInsertDel.Name = "dgvInsertDel";
             this.dgvInsertDel.ReadOnly = true;
-            this.dgvInsertDel.Size = new System.Drawing.Size(584, 302);
+            this.dgvInsertDel.Size = new System.Drawing.Size(775, 302);
             this.dgvInsertDel.TabIndex = 7;
             this.dgvInsertDel.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvInsertDel_UserDeletedRow);
             this.dgvInsertDel.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvInsertDel_UserDeletingRow);
@@ -224,7 +230,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(721, 15);
+            this.label2.Location = new System.Drawing.Point(730, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 24);
             this.label2.TabIndex = 10;
@@ -261,11 +267,71 @@
             this.lblOutCount.BackColor = System.Drawing.Color.Transparent;
             this.lblOutCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOutCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblOutCount.Location = new System.Drawing.Point(664, 7);
+            this.lblOutCount.Location = new System.Drawing.Point(655, 7);
             this.lblOutCount.Name = "lblOutCount";
             this.lblOutCount.Size = new System.Drawing.Size(39, 42);
             this.lblOutCount.TabIndex = 12;
             this.lblOutCount.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(24, 387);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 24);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "DT:";
+            // 
+            // dtSchedDate
+            // 
+            this.dtSchedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtSchedDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtSchedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtSchedDate.Location = new System.Drawing.Point(28, 472);
+            this.dtSchedDate.Name = "dtSchedDate";
+            this.dtSchedDate.Size = new System.Drawing.Size(329, 29);
+            this.dtSchedDate.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(24, 445);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(186, 24);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "SCHEDULE DATE:";
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirm.ForeColor = System.Drawing.Color.Green;
+            this.btnConfirm.Location = new System.Drawing.Point(67, 548);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(216, 45);
+            this.btnConfirm.TabIndex = 6;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
+            // btnViewSum
+            // 
+            this.btnViewSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnViewSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewSum.ForeColor = System.Drawing.Color.Green;
+            this.btnViewSum.Location = new System.Drawing.Point(67, 599);
+            this.btnViewSum.Name = "btnViewSum";
+            this.btnViewSum.Size = new System.Drawing.Size(216, 45);
+            this.btnViewSum.TabIndex = 7;
+            this.btnViewSum.Text = "View Summary";
+            this.btnViewSum.UseVisualStyleBackColor = true;
+            this.btnViewSum.Click += new System.EventHandler(this.btnViewSum_Click);
             // 
             // frmDelSched
             // 
@@ -273,6 +339,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1201, 656);
+            this.Controls.Add(this.btnViewSum);
+            this.Controls.Add(this.btnConfirm);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.dtSchedDate);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblOutCount);
             this.Controls.Add(this.chkbSelectAll);
@@ -319,5 +390,10 @@
         private System.Windows.Forms.CheckBox chkbSelectAll;
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label lblOutCount;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.DateTimePicker dtSchedDate;
+        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Button btnViewSum;
     }
 }

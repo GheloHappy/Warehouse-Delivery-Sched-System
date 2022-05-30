@@ -97,7 +97,8 @@ namespace Warehouse_Delivery_Sched_System.GUI
                         else
                         {
                             dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
-                            columnFormat();
+                            dgvInsertDel.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                            dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
                         }
                     }                    
                 }
@@ -183,6 +184,88 @@ namespace Warehouse_Delivery_Sched_System.GUI
             {
                 lblOutCount.ForeColor = Color.YellowGreen;
             }      
+        }
+
+
+        //insert summary 
+
+        DialogResult countResult;
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            if (cmbDT.Text == "")
+            {
+                MessageBox.Show("Please Select DT", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if(dgvInsertDel.Rows.Count == 0)
+                {
+                    MessageBox.Show("Please Select Customer", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+
+                    if (Convert.ToInt32(lblOutCount.Text) >= 5)
+                    {
+                        countResult = MessageBox.Show("You are exceeding the maximum Outlet Count of 4.", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        if (countResult == DialogResult.OK)
+                        {
+                            insertSum();
+                        }
+                    }
+                    else
+                    {
+                        insertSum();
+                    }
+                }
+            }
+        }
+
+        private void insertSum()
+        {
+            foreach (DataGridViewRow row in dgvInsertDel.Rows)
+            {
+                DataGridViewCell cellInvc = row.Cells[1];
+                DataGridViewCell cellShipID = row.Cells[0];
+                DataGridViewCell cellAmt = row.Cells[2];
+
+
+                if (con.insertSummary(cmbDT.Text, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), dtSchedDate.Value.ToString("M/d/yyyy")) == true)
+                {
+                    MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already Scheduled.");
+                }else
+                {
+                    con.updateSOShipHeader(cellInvc.Value.ToString(), cmbDT.Text, dtSchedDate.Value.ToString("M/d/yyyy"));
+                }
+
+
+            }
+
+            clearCheckedDGv();
+
+            dgvLoad();
+
+            dgvSched.DataSource = con.filterDGVSched("", false);
+            cmbCity.SelectedIndex = -1;
+
+            chkbSelectAll.Checked = false;
+
+            columnFormat();
+
+            dgvInsertDel.Rows.Clear();
+            con.clearTemp();
+            updateTotal();
+            updateOutletCount();
+
+            MessageBox.Show("Schedule Successfully Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void btnViewSum_Click(object sender, EventArgs e)
+        {
+            GUI.frmViewSum form2 = new GUI.frmViewSum();
+            form2.ShowDialog();
         }
     }
 }

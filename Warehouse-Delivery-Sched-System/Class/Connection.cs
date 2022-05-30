@@ -119,6 +119,23 @@ namespace Warehouse_Delivery_Sched_System.Class
             connOS.Close();
         }
 
+
+        public void updateSOShipHeader(string invcNbr, string shipvia,string ordDate)
+        {
+            conn.Open();
+            //connSL.Open();
+
+            using (cmd = new SqlCommand("UPDATE SOShipheader set orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", conn))//to change to conSL when live
+            {
+                cmd.Parameters.AddWithValue("@ordDate", ordDate);
+                cmd.Parameters.AddWithValue("@shipvia", shipvia);
+                cmd.ExecuteNonQuery();
+            }
+
+            conn.Close();
+            //connSL.Close();
+        }
+
         //--------------------------------------------------------MDISERVER - dbOpenShippers - shipvia------------------------------------------------------------------
         public void fillcmbDT(ComboBox cmbDT)
         {
@@ -241,5 +258,119 @@ namespace Warehouse_Delivery_Sched_System.Class
             return outCount;
         }
 
+        bool insSumToggle;
+
+        //insert function
+        public bool insertSummary(string shipVia,string invcNbr, string shipName, double amt, string date)
+        {
+            conn.Open();
+
+            insSumToggle = false;
+
+            sda = new SqlDataAdapter("SELECT InvcNbr from Summary WHERE InvcNbr = '" + invcNbr + "'", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (row != null)
+                    {
+                        conn.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        insSumToggle = true;
+                    }
+                }
+            }
+            else
+            {
+                insSumToggle = true;
+            }
+
+            if (insSumToggle == true)
+            {
+                using (cmd = new SqlCommand("INSERT INTO Summary VALUES(@shipVia,@invcNbr,@shipName,@amt,@date)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@shipVia", shipVia);
+                    cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
+                    cmd.Parameters.AddWithValue("@shipName", shipName);
+                    cmd.Parameters.AddWithValue("@amt", amt);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+
+            conn.Close();
+            return false;
+        }
+
+        //frmSummary
+
+        public DataTable fillDGVSum()
+        {
+            conn.Open();
+            sda = new SqlDataAdapter("SELECT * FROM Summary", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }
+
+        string queryFilter;
+        public void fillCmbFilter(ComboBox cmbDT,string filter)
+        {
+            conn.Open();
+
+
+            if (filter == "ShipViaID")
+            {
+                sda = new SqlDataAdapter("SELECT DISTINCT ShipViaId FROM Summary", conn);
+                queryFilter = "ShipViaId";
+            }
+            else if (filter == "INVC#")
+            {
+                sda = new SqlDataAdapter("SELECT DISTINCT InvcNbr FROM Summary", conn);
+                queryFilter = "InvcNbr";
+            }
+            else
+            {
+                sda = new SqlDataAdapter("SELECT DISTINCT ScheduleDate FROM Summary", conn);
+                queryFilter = "ScheduleDate";
+            }
+            
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if(filter != "ShipViaID" && filter != "INVC#")
+                {
+                    cmbDT.Items.Add(DateTime.Parse(row[queryFilter].ToString()).ToString("M/d/yyyy"));
+                }
+                else
+                {
+                    cmbDT.Items.Add(row[queryFilter].ToString());
+                }
+            }
+
+            conn.Close();
+        }
+
+        public DataTable filterDGVSum(string selFilter)
+        {
+            conn.Open();
+            sda = new SqlDataAdapter("SELECT * FROM Summary WHERE " + queryFilter + "='" + selFilter + "'", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }
     }
 }

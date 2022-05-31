@@ -13,6 +13,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
     public partial class frmDelSched : Form
     {
         Class.Connection con = Class.GlobalVars.con;
+
+        string selSchedDate;
+        string selDT;
+        //bool toggleExistSched;
+
         public frmDelSched()
         {
             InitializeComponent();
@@ -30,11 +35,44 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvSched.DataSource = con.filterDGVSched("",false);           
 
             cmbLoad();
+
+            dtSchedDate.Value = dtSchedDate.Value.AddDays(1);
         }
 
         private void cmbDT_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblDT.Text = con.showLblDT(cmbDT.Text);
+
+            //selSchedDate = dtSchedDate.Value.ToString("M/d/yyyy");
+
+            //if (con.checkFillDGVInsert(cmbDT.Text, selSchedDate) == true)
+            //{
+            //    toggleExistSched = true;
+
+            //    clearDGVInsert();
+
+            //    dgvInsertDel.DataSource = con.fillDGVInsertExist(cmbDT.Text, selSchedDate);
+            //}
+            //else
+            //{
+            //    toggleExistSched = false;
+
+            //    clearDGVInsert();
+
+            //                    dgvInsertDel.Columns.Add("shipName", "Ship To");
+            //                    dgvInsertDel.Columns.Add("invcNbr", "Invoice #");
+            //                    dgvInsertDel.Columns.Add("Amount", "Amount");
+            //}
+        }
+
+        private void clearDGVInsert()
+        {
+            dgvInsertDel.DataSource = null;
+            dgvInsertDel.Rows.Clear();
+            dgvInsertDel.Columns.Clear();
+            con.clearTemp();
+            updateTotal();
+            updateOutletCount();
         }
 
         DataGridViewCheckBoxColumn schedCol = new DataGridViewCheckBoxColumn();
@@ -90,15 +128,34 @@ namespace Warehouse_Delivery_Sched_System.GUI
                         DataGridViewCell cellShipID = row.Cells[2];
                         DataGridViewCell cellAmt = row.Cells[4];
 
+                        row.DefaultCellStyle.BackColor = Color.Red;
+
                         if (con.insertToTempTbl(cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value)) == true)
                         {
                             MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already added.");
                         }
                         else
                         {
-                            dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
-                            dgvInsertDel.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                            dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
+                            //if (toggleExistSched == true)
+                            //{
+                            //    clearDGVInsert();
+
+                            //    dgvInsertDel.Columns.Add("shipName", "Ship To");
+                            //    dgvInsertDel.Columns.Add("invcNbr", "Invoice #");
+                            //    dgvInsertDel.Columns.Add("Amount", "Amount");
+
+                            //    dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
+                            //    dgvInsertDel.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                            //    dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
+
+                            //    toggleExistSched = false;
+                            //}
+                            //else
+                            //{
+                                dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
+                                dgvInsertDel.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                                dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
+                            //}        
                         }
                     }                    
                 }
@@ -225,6 +282,9 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
         private void insertSum()
         {
+            selSchedDate = dtSchedDate.Value.ToString("M/d/yyyy");
+            selDT = cmbDT.Text;
+
             foreach (DataGridViewRow row in dgvInsertDel.Rows)
             {
                 DataGridViewCell cellInvc = row.Cells[1];
@@ -232,15 +292,19 @@ namespace Warehouse_Delivery_Sched_System.GUI
                 DataGridViewCell cellAmt = row.Cells[2];
 
 
-                if (con.insertSummary(cmbDT.Text, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), dtSchedDate.Value.ToString("M/d/yyyy")) == true)
+                if (con.insertSummary(selDT, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), selSchedDate) == true)
                 {
-                    MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already Scheduled.");
-                }else
-                {
-                    con.updateSOShipHeader(cellInvc.Value.ToString(), cmbDT.Text, dtSchedDate.Value.ToString("M/d/yyyy"));
+                    //MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already Scheduled.");
+                    countResult = MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " is Already Scheduled on " +
+                        selSchedDate + " - " + cellShipID.Value.ToString().Trim() + ". Do you want to update DT?", 
+                        "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    
+                    if (countResult == DialogResult.Yes)
+                    {
+                        con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());                      
+                    }      
                 }
-
-
+                con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate);
             }
 
             clearCheckedDGv();
@@ -249,6 +313,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
             dgvSched.DataSource = con.filterDGVSched("", false);
             cmbCity.SelectedIndex = -1;
+            cmbDT.SelectedIndex = -1;
 
             chkbSelectAll.Checked = false;
 
@@ -258,6 +323,8 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.clearTemp();
             updateTotal();
             updateOutletCount();
+
+            dgvSched.DefaultCellStyle.BackColor = Color.Empty;
 
             MessageBox.Show("Schedule Successfully Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }

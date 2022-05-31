@@ -293,13 +293,13 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             if (insSumToggle == true)
             {
-                using (cmd = new SqlCommand("INSERT INTO Summary VALUES(@shipVia,@invcNbr,@shipName,@amt,@date)", conn))
+                using (cmd = new SqlCommand("INSERT INTO Summary VALUES(@shipVia,@invcNbr,@shipName,@amt,@schedDate)", conn))
                 {
                     cmd.Parameters.AddWithValue("@shipVia", shipVia);
                     cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
                     cmd.Parameters.AddWithValue("@shipName", shipName);
                     cmd.Parameters.AddWithValue("@amt", amt);
-                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@schedDate", date);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -307,6 +307,22 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             conn.Close();
             return false;
+        }
+
+
+        public void updateSummary(string shipVia, string date, string invcNbr)
+        {
+            conn.Open();
+
+            using (cmd = new SqlCommand("UPDATE Summary SET shipViaID=@shipvia,ScheduleDate=@schedDate WHERE InvcNbr=@invcNbr ", conn))
+            {
+                cmd.Parameters.AddWithValue("@shipVia", shipVia);
+                cmd.Parameters.AddWithValue("@schedDate", date);
+                cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
+                cmd.ExecuteNonQuery();
+            }
+
+            conn.Close();
         }
 
         //frmSummary
@@ -372,5 +388,41 @@ namespace Warehouse_Delivery_Sched_System.Class
             conn.Close();
             return dt;
         }
+
+
+        //for existing Summary with DT
+        //public bool checkFillDGVInsert(string DT, string date)
+        //{
+        //    conn.Open();
+        //    sda = new SqlDataAdapter("SELECT * FROM Summary WHERE ShipViaId='" + DT + "' AND ScheduleDate='" + date +"'", conn);
+        //    dt = new DataTable();
+        //    sda.Fill(dt);
+
+        //    if (dt.Rows.Count != 0)
+        //    {
+        //        foreach (DataRow row in dt.Rows)
+        //        {
+        //            if (row != null)
+        //            {
+        //                conn.Close();
+        //                return true;
+        //            }
+        //        }
+        //    }
+
+        //    conn.Close();
+        //    return false;
+        //}
+
+        //public DataTable fillDGVInsertExist(string DT, string date)
+        //{
+        //    conn.Open();
+        //    sda = new SqlDataAdapter("SELECT * FROM Summary WHERE ShipViaId='" + DT + "' AND ScheduleDate='" + date + "'", conn);
+        //    dt = new DataTable();
+        //    sda.Fill(dt);
+
+        //    conn.Close();
+        //    return dt;
+        //}
     }
 }

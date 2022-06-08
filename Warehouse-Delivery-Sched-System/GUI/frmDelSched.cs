@@ -27,12 +27,14 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             WindowState = FormWindowState.Maximized;
 
+            cmbBrgy.Enabled = false;
+
             lblCompany.Text = Class.GlobalVars.strCompany;
 
             con.clearTemp();
 
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched("",false);           
+            dgvSched.DataSource = con.filterDGVSched("", false, false); ;           
 
             cmbLoad();
 
@@ -96,9 +98,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             dgvLoad();
 
-            dgvSched.DataSource = con.filterDGVSched("",false);
+            dgvSched.DataSource = con.filterDGVSched("",false,false);
             cmbCity.SelectedIndex = -1;
+            cmbBrgy.SelectedIndex = -1;
 
+            cmbBrgy.Enabled = false;
             chkbSelectAll.Checked = false;
 
             columnFormat();
@@ -171,8 +175,14 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void cmbCity_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched(cmbCity.Text, true);
+            dgvSched.DataSource = con.filterDGVSched(cmbCity.Text, true,false);
             columnFormat();
+            cmbBrgy.Enabled = true;
+
+            cmbBrgy.Items.Clear();
+            cmbBrgy.Text = "";
+            con.fillCmbBrgy(cmbBrgy, cmbCity.Text);
+            cmbBrgy.SelectedIndex = -1;
         }
 
         private void dgvInsertDel_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -304,16 +314,18 @@ namespace Warehouse_Delivery_Sched_System.GUI
                         con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());                      
                     }      
                 }
-                con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate);
+                //con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate); //UNCOMMENT FOR LIVE TESTING
             }
 
             clearCheckedDGv();
 
             dgvLoad();
 
-            dgvSched.DataSource = con.filterDGVSched("", false);
+            dgvSched.DataSource = con.filterDGVSched("", false,false);
             cmbCity.SelectedIndex = -1;
             cmbDT.SelectedIndex = -1;
+            cmbBrgy.SelectedIndex = -1;
+            cmbBrgy.Enabled = false;
 
             chkbSelectAll.Checked = false;
 
@@ -333,6 +345,13 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             GUI.frmViewSum form2 = new GUI.frmViewSum();
             form2.ShowDialog();
+        }
+
+        private void cmbBrgy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvLoad();
+            dgvSched.DataSource = con.filterDGVSched(cmbBrgy.Text, true, true);
+            columnFormat();
         }
     }
 }

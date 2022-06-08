@@ -81,22 +81,27 @@ namespace Warehouse_Delivery_Sched_System.Class
         }
 
         //--------------------------------------------------------MDISERVER - MONHEIMAPP - a_Whse_Delivery_Sched_sys-------------------------------------------------------
-        public DataTable filterDGVSched(string city, bool isFiltered)
+        public DataTable filterDGVSched(string strFilter, bool isFiltered, bool isFilteredBrgy)
         {
             connSL.Open();
 
-            if (isFiltered == false || city == "")
+            if (!isFiltered && !isFilteredBrgy || strFilter == "")
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
+                dt = new DataTable();
+                sda.Fill(dt);
+            }
+            else if (isFilteredBrgy && isFiltered)
+            {
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
             else
             {
-
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + city + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + strFilter + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
-                sda.Fill(dt);
+                sda.Fill(dt);              
             }
 
             connSL.Close();
@@ -107,7 +112,7 @@ namespace Warehouse_Delivery_Sched_System.Class
         {
             connOS.Open();
 
-            sda = new SqlDataAdapter("SELECT DISTINCT CITY FROM a_Whse_Delivery_Sched_sys WHERE CITY IS NOT NULL AND CITY != '' AND InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
+            sda = new SqlDataAdapter("SELECT DISTINCT CITY FROM a_Whse_Delivery_Sched_sys WHERE CITY IS NOT NULL AND CITY != ''", connSL);
             dt = new DataTable();
             sda.Fill(dt);
 
@@ -119,13 +124,29 @@ namespace Warehouse_Delivery_Sched_System.Class
             connOS.Close();
         }
 
+        public void fillCmbBrgy(ComboBox cmbBrgy,string city)
+        {
+            connOS.Open();
+
+            sda = new SqlDataAdapter("SELECT DISTINCT Barangay FROM a_Whse_Delivery_Sched_sys WHERE CITY IS NOT NULL AND CITY != '' AND City = '"+ city+"'", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                cmbBrgy.Items.Add(row["Barangay"].ToString());
+            }
+
+            connOS.Close();
+        }
+
 
         public void updateSOShipHeader(string invcNbr, string shipvia,string ordDate)
         {
-            conn.Open();
-            //connSL.Open();
+            //conn.Open();
+            connSL.Open();
 
-            using (cmd = new SqlCommand("UPDATE SOShipheader set orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", conn))//to change to conSL when live
+            using (cmd = new SqlCommand("UPDATE SOShipheader set orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", connSL))//to change to conSL when live
             {
                 cmd.Parameters.AddWithValue("@ordDate", ordDate);
                 cmd.Parameters.AddWithValue("@shipvia", shipvia);
@@ -133,7 +154,7 @@ namespace Warehouse_Delivery_Sched_System.Class
             }
 
             conn.Close();
-            //connSL.Close();
+            connSL.Close();
         }
 
         //--------------------------------------------------------MDISERVER - dbOpenShippers - shipvia------------------------------------------------------------------
@@ -325,7 +346,7 @@ namespace Warehouse_Delivery_Sched_System.Class
             conn.Close();
         }
 
-        //frmSummary
+        //--------------------------------------------------------MDISERVER-L - WhseSchedDelSys - Summary---------------------------------------------------------------
 
         public DataTable fillDGVSum()
         {
@@ -389,40 +410,9 @@ namespace Warehouse_Delivery_Sched_System.Class
             return dt;
         }
 
+        public void updateSum()
+        {
 
-        //for existing Summary with DT
-        //public bool checkFillDGVInsert(string DT, string date)
-        //{
-        //    conn.Open();
-        //    sda = new SqlDataAdapter("SELECT * FROM Summary WHERE ShipViaId='" + DT + "' AND ScheduleDate='" + date +"'", conn);
-        //    dt = new DataTable();
-        //    sda.Fill(dt);
-
-        //    if (dt.Rows.Count != 0)
-        //    {
-        //        foreach (DataRow row in dt.Rows)
-        //        {
-        //            if (row != null)
-        //            {
-        //                conn.Close();
-        //                return true;
-        //            }
-        //        }
-        //    }
-
-        //    conn.Close();
-        //    return false;
-        //}
-
-        //public DataTable fillDGVInsertExist(string DT, string date)
-        //{
-        //    conn.Open();
-        //    sda = new SqlDataAdapter("SELECT * FROM Summary WHERE ShipViaId='" + DT + "' AND ScheduleDate='" + date + "'", conn);
-        //    dt = new DataTable();
-        //    sda.Fill(dt);
-
-        //    conn.Close();
-        //    return dt;
-        //}
+        }
     }
 }

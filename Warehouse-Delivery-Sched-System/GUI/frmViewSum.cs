@@ -18,17 +18,21 @@ namespace Warehouse_Delivery_Sched_System.GUI
             InitializeComponent();
         }
 
+        DataGridViewCheckBoxColumn checkCol = new DataGridViewCheckBoxColumn();
+
         private void frmViewSum_Load(object sender, EventArgs e)
         {
-            dgvSum.DataSource = con.fillDGVSum();
+            dgvSum.Columns.Add(checkCol);
+            dgvSumLoad();
 
-            dgvSum.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            con.fillcmbDT(cmbDT);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cmbFilter.Text = "";
             cmbFilter.Items.Clear();
-            con.fillCmbFilter(cmbFilter, cmbMainFilter.Text);
+            con.fillCmbFilter(cmbFilter, cmbMainFilter.Text);       
         }
 
         private void cmbFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,8 +41,61 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
             dgvSum.DataSource = con.filterDGVSum(cmbFilter.Text);
 
-            dgvSum.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSum.Columns[3].DefaultCellStyle.Format = "N2";
+            dgvSum.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSum.Columns[4].DefaultCellStyle.Format = "N2";
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            updateSum();
+
+
+        }
+        string selSchedDate;
+        string selDT;
+
+        private void updateSum()
+        {
+            selSchedDate = dtSchedDate.Value.ToString("M/d/yyyy");
+            selDT = cmbDT.Text;
+
+            foreach (DataGridViewRow row in dgvSum.Rows)
+            {
+                DataGridViewCheckBoxCell cell = row.Cells[0] as DataGridViewCheckBoxCell;
+
+
+                if (cell.Value != null)
+                {
+                    if (Convert.ToBoolean(cell.Value) == true)
+                    {
+                        DataGridViewCell cellInvc = row.Cells[2];
+
+                        con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());
+
+                        //con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate); //UNCOMMENT FOR LIVE TESTING
+                    }
+                }
+            }
+
+
+            dgvSumLoad();
+
+            cmbDT.SelectedIndex = -1;
+
+            MessageBox.Show("Successfully Updated", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void dgvSumLoad()
+        {
+            dgvSum.DataSource = null;
+             
+            //dgvSum.Columns.Add(checkCol);
+            dgvSum.DataSource = con.fillDGVSum();
+
+            dgvSum.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSum.Columns[4].DefaultCellStyle.Format = "N2";
+        }
+
+
     }
 }

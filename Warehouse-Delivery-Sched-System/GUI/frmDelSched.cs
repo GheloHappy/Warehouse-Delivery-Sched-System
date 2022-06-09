@@ -223,10 +223,20 @@ namespace Warehouse_Delivery_Sched_System.GUI
             chkbSelectAll.Checked = false;
         }
 
+        DataGridViewColumn columnStatus;
+        DataGridViewColumn columnCheck;
+
+
+
         private void columnFormat()
         {
             dgvSched.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSched.Columns[4].DefaultCellStyle.Format = "N2";
+
+            columnCheck = dgvSched.Columns[0];
+            columnStatus = dgvSched.Columns[5];
+            columnCheck.Width = 30;
+            columnStatus.Width = 40;
         }
 
         private void updateTotal()

@@ -87,19 +87,19 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             if (!isFiltered && !isFilteredBrgy || strFilter == "")
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr IS NOT NULL AND InvcNbr != ''", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY FROM a_Whse_Delivery_Sched_sys", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
             else if (isFilteredBrgy && isFiltered)
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
             else
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + strFilter + "' AND InvcNbr IS NOT NULL AND InvcNbr != '' ORDER BY CancelDate ASC", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);              
             }

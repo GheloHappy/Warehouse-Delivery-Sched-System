@@ -87,19 +87,19 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             if (!isFiltered && !isFilteredBrgy || strFilter == "")
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY FROM a_Whse_Delivery_Sched_sys", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
             else if (isFilteredBrgy && isFiltered)
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
             else
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);              
             }
@@ -206,7 +206,7 @@ namespace Warehouse_Delivery_Sched_System.Class
 
         int toggle;
 
-        public bool insertToTempTbl(string invcNbr, string shipName, double amt)
+        public bool insertToTempTbl(string invcNbr, string shipName, double amt, int QtyInCase)
         {
             conn.Open();
 
@@ -238,11 +238,12 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             if (toggle == 1)
             {
-                using (cmd = new SqlCommand("INSERT INTO TempInsertTable VALUES(@invcNbr,@shipName,@amt)", conn))
+                using (cmd = new SqlCommand("INSERT INTO TempInsertTable VALUES(@invcNbr,@shipName,@amt,@QtyInCase)", conn))
                 {
                     cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
                     cmd.Parameters.AddWithValue("@shipName", shipName);
                     cmd.Parameters.AddWithValue("@amt", amt);
+                    cmd.Parameters.AddWithValue("@QtyInCase", QtyInCase);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -277,6 +278,28 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             conn.Close();
             return outCount;
+        }
+
+        int caseCount;
+
+        //count Item Per Case
+        public int itemPerCaseCount()
+        {
+            caseCount = 0;
+
+            conn.Open();
+
+            sda = new SqlDataAdapter("SELECT QtyInCase FROM tempInsertTable", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                caseCount =  caseCount + Int32.Parse(row["QtyInCase"].ToString()) ;
+            }
+
+            conn.Close();
+            return caseCount;
         }
 
         bool insSumToggle;

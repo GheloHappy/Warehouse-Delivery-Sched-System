@@ -34,7 +34,8 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.clearTemp();
 
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched("", false, false); ;           
+            dgvSched.DataSource = con.filterDGVSched("", false, false);
+            dgvSched.Columns[8].Visible = false;
 
             cmbLoad();
 
@@ -75,6 +76,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.clearTemp();
             updateTotal();
             updateOutletCount();
+            updatePerCaseCount();
         }
 
         DataGridViewCheckBoxColumn schedCol = new DataGridViewCheckBoxColumn();
@@ -99,6 +101,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvLoad();
 
             dgvSched.DataSource = con.filterDGVSched("",false,false);
+            dgvSched.Columns[8].Visible = false;
             cmbCity.SelectedIndex = -1;
             cmbBrgy.SelectedIndex = -1;
 
@@ -113,6 +116,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             chkDGV();
 
             updateOutletCount();
+            updatePerCaseCount();
 
             updateTotal();
 
@@ -131,10 +135,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
                         DataGridViewCell cellInvc = row.Cells[1];
                         DataGridViewCell cellShipID = row.Cells[2];
                         DataGridViewCell cellAmt = row.Cells[4];
+                        DataGridViewCell cellPerCase = row.Cells[8];
 
                         row.DefaultCellStyle.BackColor = Color.Red;
 
-                        if (con.insertToTempTbl(cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value)) == true)
+                        if (con.insertToTempTbl(cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), Int32.Parse(cellPerCase.Value.ToString())) == true)
                         {
                             MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already added.");
                         }
@@ -156,12 +161,12 @@ namespace Warehouse_Delivery_Sched_System.GUI
                             //}
                             //else
                             //{
-                                dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
-                                dgvInsertDel.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                                dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
+                            dgvInsertDel.Rows.Add(cellShipID.Value, cellInvc.Value, cellAmt.Value);
+                            dgvInsertDel.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                            dgvInsertDel.Columns[2].DefaultCellStyle.Format = "N2";
                             //}        
                         }
-                    }                    
+                    }
                 }
 
             }
@@ -176,6 +181,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             dgvLoad();
             dgvSched.DataSource = con.filterDGVSched(cmbCity.Text, true,false);
+            dgvSched.Columns[8].Visible = false;
             columnFormat();
             cmbBrgy.Enabled = true;
 
@@ -196,6 +202,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             updateTotal();
             updateOutletCount();
+            updatePerCaseCount();
         }
 
         private void chkbSelectAll_CheckedChanged(object sender, EventArgs e)
@@ -261,6 +268,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
             {
                 lblOutCount.ForeColor = Color.YellowGreen;
             }      
+        }
+
+        private void updatePerCaseCount()
+        {
+            lblPerCase.Text = con.itemPerCaseCount().ToString();
         }
 
 
@@ -332,6 +344,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvLoad();
 
             dgvSched.DataSource = con.filterDGVSched("", false,false);
+            dgvSched.Columns[8].Visible = false;
             cmbCity.SelectedIndex = -1;
             cmbDT.SelectedIndex = -1;
             cmbBrgy.SelectedIndex = -1;
@@ -345,6 +358,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.clearTemp();
             updateTotal();
             updateOutletCount();
+            updatePerCaseCount();
 
             dgvSched.DefaultCellStyle.BackColor = Color.Empty;
 
@@ -361,6 +375,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             dgvLoad();
             dgvSched.DataSource = con.filterDGVSched(cmbBrgy.Text, true, true);
+            dgvSched.Columns[8].Visible = false;
             columnFormat();
         }
     }

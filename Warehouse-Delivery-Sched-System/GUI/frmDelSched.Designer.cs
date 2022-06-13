@@ -39,9 +39,6 @@
             this.lblCompany = new System.Windows.Forms.Label();
             this.btnFilter = new System.Windows.Forms.Button();
             this.dgvInsertDel = new System.Windows.Forms.DataGridView();
-            this.shipName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invcNbr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnADD = new System.Windows.Forms.Button();
             this.lblSum = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,6 +52,11 @@
             this.btnViewSum = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbBrgy = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblPerCase = new System.Windows.Forms.Label();
+            this.shipName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invcNbr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -89,7 +91,7 @@
             this.cmbDT.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDT.FormattingEnabled = true;
-            this.cmbDT.Location = new System.Drawing.Point(79, 384);
+            this.cmbDT.Location = new System.Drawing.Point(76, 424);
             this.cmbDT.Name = "cmbDT";
             this.cmbDT.Size = new System.Drawing.Size(164, 32);
             this.cmbDT.TabIndex = 4;
@@ -101,7 +103,7 @@
             this.lblDT.AutoSize = true;
             this.lblDT.BackColor = System.Drawing.Color.White;
             this.lblDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDT.Location = new System.Drawing.Point(75, 357);
+            this.lblDT.Location = new System.Drawing.Point(72, 397);
             this.lblDT.Name = "lblDT";
             this.lblDT.Size = new System.Drawing.Size(52, 24);
             this.lblDT.TabIndex = 2;
@@ -137,7 +139,7 @@
             this.lblCompany.BackColor = System.Drawing.Color.White;
             this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.ForeColor = System.Drawing.Color.Red;
-            this.lblCompany.Location = new System.Drawing.Point(270, 387);
+            this.lblCompany.Location = new System.Drawing.Point(263, 427);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(118, 24);
             this.lblCompany.TabIndex = 5;
@@ -182,24 +184,6 @@
             this.dgvInsertDel.TabIndex = 7;
             this.dgvInsertDel.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvInsertDel_UserDeletedRow);
             this.dgvInsertDel.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvInsertDel_UserDeletingRow);
-            // 
-            // shipName
-            // 
-            this.shipName.HeaderText = "Ship To";
-            this.shipName.Name = "shipName";
-            this.shipName.ReadOnly = true;
-            // 
-            // invcNbr
-            // 
-            this.invcNbr.HeaderText = "Invoice #";
-            this.invcNbr.Name = "invcNbr";
-            this.invcNbr.ReadOnly = true;
-            // 
-            // Amount
-            // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
             // 
             // btnADD
             // 
@@ -281,7 +265,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(24, 387);
+            this.label4.Location = new System.Drawing.Point(21, 427);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 24);
             this.label4.TabIndex = 14;
@@ -292,7 +276,7 @@
             this.dtSchedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSchedDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtSchedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtSchedDate.Location = new System.Drawing.Point(28, 472);
+            this.dtSchedDate.Location = new System.Drawing.Point(18, 495);
             this.dtSchedDate.Name = "dtSchedDate";
             this.dtSchedDate.Size = new System.Drawing.Size(329, 29);
             this.dtSchedDate.TabIndex = 5;
@@ -303,7 +287,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(24, 445);
+            this.label5.Location = new System.Drawing.Point(14, 468);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(186, 24);
             this.label5.TabIndex = 16;
@@ -314,7 +298,7 @@
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.ForeColor = System.Drawing.Color.Green;
-            this.btnConfirm.Location = new System.Drawing.Point(67, 548);
+            this.btnConfirm.Location = new System.Drawing.Point(76, 548);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(216, 45);
             this.btnConfirm.TabIndex = 6;
@@ -327,7 +311,7 @@
             this.btnViewSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnViewSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewSum.ForeColor = System.Drawing.Color.Green;
-            this.btnViewSum.Location = new System.Drawing.Point(67, 599);
+            this.btnViewSum.Location = new System.Drawing.Point(76, 599);
             this.btnViewSum.Name = "btnViewSum";
             this.btnViewSum.Size = new System.Drawing.Size(216, 45);
             this.btnViewSum.TabIndex = 7;
@@ -358,12 +342,57 @@
             this.cmbBrgy.TabIndex = 17;
             this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(72, 356);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(147, 24);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Per Case Count:";
+            // 
+            // lblPerCase
+            // 
+            this.lblPerCase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPerCase.AutoSize = true;
+            this.lblPerCase.BackColor = System.Drawing.Color.Transparent;
+            this.lblPerCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPerCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblPerCase.Location = new System.Drawing.Point(225, 340);
+            this.lblPerCase.Name = "lblPerCase";
+            this.lblPerCase.Size = new System.Drawing.Size(39, 42);
+            this.lblPerCase.TabIndex = 19;
+            this.lblPerCase.Text = "0";
+            // 
+            // shipName
+            // 
+            this.shipName.HeaderText = "Ship To";
+            this.shipName.Name = "shipName";
+            this.shipName.ReadOnly = true;
+            // 
+            // invcNbr
+            // 
+            this.invcNbr.HeaderText = "Invoice #";
+            this.invcNbr.Name = "invcNbr";
+            this.invcNbr.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            // 
             // frmDelSched
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1201, 656);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblPerCase);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cmbBrgy);
             this.Controls.Add(this.btnViewSum);
@@ -409,9 +438,6 @@
         private System.Windows.Forms.Button btnFilter;
         public System.Windows.Forms.DataGridView dgvInsertDel;
         private System.Windows.Forms.Button btnADD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn shipName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn invcNbr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         public System.Windows.Forms.Label lblSum;
         public System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkbSelectAll;
@@ -424,5 +450,10 @@
         private System.Windows.Forms.Button btnViewSum;
         public System.Windows.Forms.Label label6;
         public System.Windows.Forms.ComboBox cmbBrgy;
+        public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.Label lblPerCase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shipName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invcNbr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
     }
 }

@@ -96,6 +96,5 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvSum.Columns[4].DefaultCellStyle.Format = "N2";
         }
 
-
     }
 }

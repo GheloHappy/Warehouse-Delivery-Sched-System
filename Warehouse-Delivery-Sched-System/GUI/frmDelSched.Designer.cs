@@ -39,11 +39,13 @@
             this.lblCompany = new System.Windows.Forms.Label();
             this.btnFilter = new System.Windows.Forms.Button();
             this.dgvInsertDel = new System.Windows.Forms.DataGridView();
+            this.shipName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invcNbr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnADD = new System.Windows.Forms.Button();
             this.lblSum = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkbSelectAll = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.lblOutCount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dtSchedDate = new System.Windows.Forms.DateTimePicker();
@@ -54,9 +56,7 @@
             this.cmbBrgy = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblPerCase = new System.Windows.Forms.Label();
-            this.shipName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invcNbr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -81,7 +81,7 @@
             this.dgvSched.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSched.Location = new System.Drawing.Point(10, 53);
             this.dgvSched.Name = "dgvSched";
-            this.dgvSched.Size = new System.Drawing.Size(1179, 283);
+            this.dgvSched.Size = new System.Drawing.Size(1207, 283);
             this.dgvSched.TabIndex = 0;
             // 
             // cmbDT
@@ -180,10 +180,28 @@
             this.dgvInsertDel.Location = new System.Drawing.Point(414, 342);
             this.dgvInsertDel.Name = "dgvInsertDel";
             this.dgvInsertDel.ReadOnly = true;
-            this.dgvInsertDel.Size = new System.Drawing.Size(775, 302);
+            this.dgvInsertDel.Size = new System.Drawing.Size(803, 302);
             this.dgvInsertDel.TabIndex = 7;
             this.dgvInsertDel.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvInsertDel_UserDeletedRow);
             this.dgvInsertDel.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvInsertDel_UserDeletingRow);
+            // 
+            // shipName
+            // 
+            this.shipName.HeaderText = "Ship To";
+            this.shipName.Name = "shipName";
+            this.shipName.ReadOnly = true;
+            // 
+            // invcNbr
+            // 
+            this.invcNbr.HeaderText = "Invoice #";
+            this.invcNbr.Name = "invcNbr";
+            this.invcNbr.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
             // 
             // btnADD
             // 
@@ -204,7 +222,7 @@
             this.lblSum.BackColor = System.Drawing.Color.Transparent;
             this.lblSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblSum.Location = new System.Drawing.Point(965, 7);
+            this.lblSum.Location = new System.Drawing.Point(965, 6);
             this.lblSum.Name = "lblSum";
             this.lblSum.Size = new System.Drawing.Size(91, 42);
             this.lblSum.TabIndex = 9;
@@ -216,7 +234,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(891, 15);
+            this.label2.Location = new System.Drawing.Point(891, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 24);
             this.label2.TabIndex = 10;
@@ -234,18 +252,6 @@
             this.chkbSelectAll.UseVisualStyleBackColor = true;
             this.chkbSelectAll.CheckedChanged += new System.EventHandler(this.chkbSelectAll_CheckedChanged);
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(747, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 24);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "OUTLET:";
-            // 
             // lblOutCount
             // 
             this.lblOutCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -253,7 +259,7 @@
             this.lblOutCount.BackColor = System.Drawing.Color.Transparent;
             this.lblOutCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOutCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblOutCount.Location = new System.Drawing.Point(834, 7);
+            this.lblOutCount.Location = new System.Drawing.Point(825, 6);
             this.lblOutCount.Name = "lblOutCount";
             this.lblOutCount.Size = new System.Drawing.Size(39, 42);
             this.lblOutCount.TabIndex = 12;
@@ -367,30 +373,24 @@
             this.lblPerCase.TabIndex = 19;
             this.lblPerCase.Text = "0";
             // 
-            // shipName
+            // label3
             // 
-            this.shipName.HeaderText = "Ship To";
-            this.shipName.Name = "shipName";
-            this.shipName.ReadOnly = true;
-            // 
-            // invcNbr
-            // 
-            this.invcNbr.HeaderText = "Invoice #";
-            this.invcNbr.Name = "invcNbr";
-            this.invcNbr.ReadOnly = true;
-            // 
-            // Amount
-            // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(738, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 24);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "OUTLET:";
             // 
             // frmDelSched
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1201, 656);
+            this.ClientSize = new System.Drawing.Size(1229, 656);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblPerCase);
             this.Controls.Add(this.label6);
@@ -441,7 +441,6 @@
         public System.Windows.Forms.Label lblSum;
         public System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkbSelectAll;
-        public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label lblOutCount;
         public System.Windows.Forms.Label label4;
         public System.Windows.Forms.Label label5;
@@ -455,5 +454,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shipName;
         private System.Windows.Forms.DataGridViewTextBoxColumn invcNbr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        public System.Windows.Forms.Label label3;
     }
 }

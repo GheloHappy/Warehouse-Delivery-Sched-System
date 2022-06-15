@@ -32,6 +32,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             lblCompany.Text = Class.GlobalVars.strCompany;
 
             con.clearTemp();
+            con.clerTempItems();
 
             dgvLoad();
             dgvSched.DataSource = con.filterDGVSched("", false, false);
@@ -251,7 +252,8 @@ namespace Warehouse_Delivery_Sched_System.GUI
             double total = dgvInsertDel.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDouble(t.Cells[2].Value));
 
-            lblSum.Text = total.ToString("C2");     
+            //lblSum.Text = total.ToString(c2);
+            lblSum.Text = string.Format("{0:N}", total);
         }
 
         private void updateOutletCount()
@@ -377,6 +379,12 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvSched.DataSource = con.filterDGVSched(cmbBrgy.Text, true, true);
             dgvSched.Columns[8].Visible = false;
             columnFormat();
+        }
+
+        //view per item of invoice
+        private void lblSum_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

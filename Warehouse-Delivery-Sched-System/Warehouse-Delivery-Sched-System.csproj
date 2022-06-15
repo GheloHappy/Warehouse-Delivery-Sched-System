@@ -63,6 +63,12 @@
     <Compile Include="GUI\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmViewItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmViewItems.Designer.cs">
+      <DependentUpon>frmViewItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmViewSum.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmViewItems.resx">
+      <DependentUpon>frmViewItems.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmViewSum.resx">
       <DependentUpon>frmViewSum.cs</DependentUpon>

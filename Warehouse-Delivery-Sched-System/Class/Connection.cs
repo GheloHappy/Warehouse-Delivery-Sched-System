@@ -140,21 +140,69 @@ namespace Warehouse_Delivery_Sched_System.Class
             connOS.Close();
         }
 
-
+        //Update SOShipHeader when Live
         public void updateSOShipHeader(string invcNbr, string shipvia,string ordDate)
         {
-            //conn.Open();
             connSL.Open();
 
-            using (cmd = new SqlCommand("UPDATE SOShipheader set orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", connSL))//to change to conSL when live
+            using (cmd = new SqlCommand("UPDATE SOShipheader set orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", connSL))
             {
                 cmd.Parameters.AddWithValue("@ordDate", ordDate);
                 cmd.Parameters.AddWithValue("@shipvia", shipvia);
                 cmd.ExecuteNonQuery();
             }
 
+            connSL.Close();
+        }
+
+
+        //Insert per item in temptable -----------------frmItemList
+
+        //public int itemIndex = 0;
+        public void showItemsSelected(DataGridView dgvItems,string invcNbr)
+        {
+            connSL.Open();
+            conn.Open();
+            sda = new SqlDataAdapter("SELECT InvtID,Descr,QtyInCase FROM a_Open_Delivered_Invoices WHERE InvcNbr ='" + invcNbr + "'", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            foreach (DataRow row in dt.Rows)
+            {
+                //dgvItems.Rows.Insert(itemIndex, row["InvtID"].ToString(), row["Descr"].ToString(), row["QtyInCase"].ToString());
+                //itemIndex++;
+
+                using (cmd = new SqlCommand("INSERT INTO TempInsertTableItems VALUES(@InvtID,@Descr,@QtyInCase)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@InvtID", row["InvtID"].ToString());
+                    cmd.Parameters.AddWithValue("@Descr", row["Descr"].ToString());
+                    cmd.Parameters.AddWithValue("@QtyInCase", row["QtyInCase"].ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
             conn.Close();
             connSL.Close();
+        }
+
+        public DataTable fillItemList()
+        {
+            conn.Open();
+            sda = new SqlDataAdapter("SELECT InvtID,Descr,Qty FROM ItemList ORDER BY QTY DESC", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }
+
+        public void clerTempItems()
+        {
+            conn.Open();
+            cmd = new SqlCommand("DELETE FROM TempInsertTableItems", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
         //--------------------------------------------------------MDISERVER - dbOpenShippers - shipvia------------------------------------------------------------------

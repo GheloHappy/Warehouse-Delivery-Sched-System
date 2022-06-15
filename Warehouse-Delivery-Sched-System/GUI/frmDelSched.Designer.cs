@@ -46,6 +46,7 @@
             this.lblSum = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkbSelectAll = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblOutCount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dtSchedDate = new System.Windows.Forms.DateTimePicker();
@@ -56,7 +57,6 @@
             this.cmbBrgy = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblPerCase = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -227,6 +227,7 @@
             this.lblSum.Size = new System.Drawing.Size(91, 42);
             this.lblSum.TabIndex = 9;
             this.lblSum.Text = "0.00";
+            this.lblSum.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblSum_MouseClick);
             // 
             // label2
             // 
@@ -252,6 +253,18 @@
             this.chkbSelectAll.UseVisualStyleBackColor = true;
             this.chkbSelectAll.CheckedChanged += new System.EventHandler(this.chkbSelectAll_CheckedChanged);
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(747, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 24);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "OUTLET:";
+            // 
             // lblOutCount
             // 
             this.lblOutCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -259,7 +272,7 @@
             this.lblOutCount.BackColor = System.Drawing.Color.Transparent;
             this.lblOutCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOutCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblOutCount.Location = new System.Drawing.Point(825, 6);
+            this.lblOutCount.Location = new System.Drawing.Point(834, 6);
             this.lblOutCount.Name = "lblOutCount";
             this.lblOutCount.Size = new System.Drawing.Size(39, 42);
             this.lblOutCount.TabIndex = 12;
@@ -373,18 +386,6 @@
             this.lblPerCase.TabIndex = 19;
             this.lblPerCase.Text = "0";
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(738, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 24);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "OUTLET:";
-            // 
             // frmDelSched
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,6 +442,7 @@
         public System.Windows.Forms.Label lblSum;
         public System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkbSelectAll;
+        public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label lblOutCount;
         public System.Windows.Forms.Label label4;
         public System.Windows.Forms.Label label5;
@@ -454,6 +456,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shipName;
         private System.Windows.Forms.DataGridViewTextBoxColumn invcNbr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        public System.Windows.Forms.Label label3;
     }
 }

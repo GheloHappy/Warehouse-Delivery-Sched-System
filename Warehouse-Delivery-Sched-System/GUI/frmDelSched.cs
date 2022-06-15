@@ -384,7 +384,18 @@ namespace Warehouse_Delivery_Sched_System.GUI
         //view per item of invoice
         private void lblSum_MouseClick(object sender, MouseEventArgs e)
         {
+            GUI.frmViewItems formItem = new GUI.frmViewItems();
+            
+            foreach (DataGridViewRow row in dgvInsertDel.Rows)
+            {
+                DataGridViewCell cellInvc = row.Cells[1];
 
+                con.showItemsSelected(formItem.dgvItems, cellInvc.Value.ToString());
+            }
+
+            //con.itemIndex = 0;
+
+            formItem.ShowDialog();
         }
     }
 }

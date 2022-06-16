@@ -51,7 +51,11 @@ namespace Warehouse_Delivery_Sched_System
             con.sqlCon(cmbCompany.Text);
 
             if (con.loginVal(txtUsrName.Text, txtPass.Text) == true && cmbCompany.Text != "")
-            {           
+            {
+                Class.GlobalVars.strUserName = txtUsrName.Text;
+
+                con.insertLogs("LOGIN", DateTime.Now.ToString());
+
                 GUI.frmDelSched form2 = new GUI.frmDelSched();
                 this.Hide();
                 form2.Show();

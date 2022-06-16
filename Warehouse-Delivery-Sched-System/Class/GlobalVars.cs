@@ -11,5 +11,7 @@ namespace Warehouse_Delivery_Sched_System.Class
         public static Connection con = new Class.Connection();
 
         public static string strCompany;
+
+        public static string strUserName;
     }
 }

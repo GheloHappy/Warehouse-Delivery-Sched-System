@@ -46,27 +46,6 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void cmbDT_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblDT.Text = con.showLblDT(cmbDT.Text);
-
-            //selSchedDate = dtSchedDate.Value.ToString("M/d/yyyy");
-
-            //if (con.checkFillDGVInsert(cmbDT.Text, selSchedDate) == true)
-            //{
-            //    toggleExistSched = true;
-
-            //    clearDGVInsert();
-
-            //    dgvInsertDel.DataSource = con.fillDGVInsertExist(cmbDT.Text, selSchedDate);
-            //}
-            //else
-            //{
-            //    toggleExistSched = false;
-
-            //    clearDGVInsert();
-
-            //                    dgvInsertDel.Columns.Add("shipName", "Ship To");
-            //                    dgvInsertDel.Columns.Add("invcNbr", "Invoice #");
-            //                    dgvInsertDel.Columns.Add("Amount", "Amount");
-            //}
         }
 
         private void clearDGVInsert()
@@ -252,7 +231,6 @@ namespace Warehouse_Delivery_Sched_System.GUI
             double total = dgvInsertDel.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDouble(t.Cells[2].Value));
 
-            //lblSum.Text = total.ToString(c2);
             lblSum.Text = string.Format("{0:N}", total);
         }
 
@@ -263,8 +241,6 @@ namespace Warehouse_Delivery_Sched_System.GUI
             if (Convert.ToInt32(lblOutCount.Text) >= 5)
             {
                 lblOutCount.ForeColor = Color.Red;
-
-                //MessageBox.Show("You are exceeding the maximum Outlet Count of 4.", "Warning!",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -328,7 +304,6 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
                 if (con.insertSummary(selDT, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), selSchedDate) == true)
                 {
-                    //MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already Scheduled.");
                     countResult = MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " is Already Scheduled on " +
                         selSchedDate + " - " + cellShipID.Value.ToString().Trim() + ". Do you want to update DT?", 
                         "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -337,9 +312,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
                     {
                         con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());                      
                     }      
-                }
+                }            
                 //con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate); //UNCOMMENT FOR LIVE TESTING
             }
+
+            con.insertLogs("Summary - " + selDT + " - " + selSchedDate, DateTime.Now.ToString());
 
             clearCheckedDGv();
 
@@ -392,8 +369,6 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
                 con.showItemsSelected(formItem.dgvItems, cellInvc.Value.ToString());
             }
-
-            //con.itemIndex = 0;
 
             formItem.ShowDialog();
         }

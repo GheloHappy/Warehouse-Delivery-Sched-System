@@ -485,5 +485,22 @@ namespace Warehouse_Delivery_Sched_System.Class
         {
 
         }
+
+        //----------------------------------LOGS
+
+        public void insertLogs(string trans, string dateTime)
+        {
+            conn.Open();
+
+            using (cmd = new SqlCommand("INSERT INTO Logs VALUES(@UserName,@Trans,@DateTime)", conn))
+            {
+                cmd.Parameters.AddWithValue("@UserName", GlobalVars.strUserName);
+                cmd.Parameters.AddWithValue("@Trans", trans);
+                cmd.Parameters.AddWithValue("@DateTime", dateTime);
+                cmd.ExecuteNonQuery();
+            }
+
+            conn.Close();
+        }
     }
 }

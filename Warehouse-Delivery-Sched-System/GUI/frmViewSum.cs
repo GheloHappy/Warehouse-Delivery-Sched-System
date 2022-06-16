@@ -49,7 +49,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             updateSum();
 
-
+            con.insertLogs("Update Summary - " + selDT + " - " + selSchedDate, DateTime.Now.ToString());
         }
         string selSchedDate;
         string selDT;

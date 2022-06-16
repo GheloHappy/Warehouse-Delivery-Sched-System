@@ -123,7 +123,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 13;
-            this.label1.Text = "v1.3";
+            this.label1.Text = "v1.4";
             // 
             // frmLogin
             // 

@@ -95,6 +95,11 @@ namespace Warehouse_Delivery_Sched_System
             txtUsrName.ForeColor = Color.Black;
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             this.Close();

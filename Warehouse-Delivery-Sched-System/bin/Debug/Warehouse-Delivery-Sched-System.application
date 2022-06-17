@@ -8,7 +8,7 @@
         <beforeApplicationStartup />
       </update>
     </subscription>
-    <deploymentProvider codebase="https://github.com/GheloHappy/Warehouse-Delivery-Sched-System/blob/master/published/Warehouse-Delivery-Sched-System.application" />
+    <deploymentProvider codebase="https://github.com/GheloHappy/Warehouse-Delivery-Sched-System/tree/master/published/Warehouse-Delivery-Sched-System.application" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
@@ -21,7 +21,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>7yjQ/U8+6PpQLuxmKlaY2666bXlNesOcb3HFTWJdiAk=</dsig:DigestValue>
+        <dsig:DigestValue>ad6FBPV/FGqufqLomxN6pZ7OVl9RSBfU2rfM4F96gC0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -81,23 +81,30 @@ namespace Warehouse_Delivery_Sched_System.Class
         }
 
         //--------------------------------------------------------MDISERVER - MONHEIMAPP - a_Whse_Delivery_Sched_sys-------------------------------------------------------
-        public DataTable filterDGVSched(string strFilter, bool isFiltered, bool isFilteredBrgy,bool isFilteredInvc, string invcNbr)
+        //public DataTable filterDGVSched(string strFilter, bool isFiltered, bool isFilteredBrgy,bool isFilteredInvc, string invcNbr)
+        public DataTable filterDGVSched(string strFilterType, string strFilter)
         {
             connSL.Open();
 
-            if (isFilteredInvc)
+            if (strFilterType == "INVC")
             {
-                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr = '" + invcNbr + "' ORDER BY CancelDate ASC", connSL);
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
-            else if (!isFiltered && !isFilteredBrgy || strFilter == "")
+            else if (strFilterType == "CUST")
+            {
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE custID = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
+                dt = new DataTable();
+                sda.Fill(dt);
+            }
+            else if (strFilterType == "ALL")
             {
                 sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
             }
-            else if (isFilteredBrgy && isFiltered)
+            else if (strFilterType == "BRGY")
             {
                 sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
@@ -161,13 +168,28 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             connSL.Close();
         }
+        public void fillcmbCust(ComboBox cmbCUst)
+        {
+            connSL.Open();
+
+            sda = new SqlDataAdapter("SELECT DISTINCT CustID FROM a_Whse_Delivery_Sched_sys", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                cmbCUst.Items.Add(row["CustID"].ToString());
+            }
+
+            connSL.Close();
+        }
 
         //Update SOShipHeader when Live
         public void updateSOShipHeader(string invcNbr, string shipvia,string ordDate)
         {
             connSL.Open();
 
-            using (cmd = new SqlCommand("UPDATE SOShipheader set orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", connSL))
+            using (cmd = new SqlCommand("UPDATE SOShipheader set User8='IT',orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", connSL))
             {
                 cmd.Parameters.AddWithValue("@ordDate", ordDate);
                 cmd.Parameters.AddWithValue("@shipvia", shipvia);

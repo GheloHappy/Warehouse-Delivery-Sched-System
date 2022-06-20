@@ -23,7 +23,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             InitializeComponent();
         }
 
-        int i = 0;
+        //int i = 0;
 
         private void frmDelSched_Load(object sender, EventArgs e)
         {
@@ -37,7 +37,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.clerTempItems();
 
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched("", false, false, false, "");
+            dgvSched.DataSource = con.filterDGVSched("ALL", "");
             dgvSched.Columns[8].Visible = false; 
 
             //foreach (DataGridViewColumn column in dgvSched.Columns)
@@ -50,10 +50,21 @@ namespace Warehouse_Delivery_Sched_System.GUI
             //    i++;
             //}
             
-
             cmbLoad();
 
-            dtSchedDate.Value = dtSchedDate.Value.AddDays(1);
+            dateCal();
+        }
+
+        private void dateCal()
+        {
+            if (DateTime.Now.DayOfWeek.ToString() == "Saturday")
+            {
+                dtSchedDate.Value = dtSchedDate.Value.AddDays(2);
+            }
+            else
+            {
+                dtSchedDate.Value = dtSchedDate.Value.AddDays(1);
+            }
         }
 
         private void cmbDT_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,6 +97,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             con.fillcmbCity(cmbCity);
             con.fillcmbDT(cmbDT);
             con.fillcmbInvc(cmbInvcNum);
+            con.fillcmbCust(cmbCUST);
 
             columnFormat();
         }
@@ -94,7 +106,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         {
             dgvLoad();
 
-            dgvSched.DataSource = con.filterDGVSched("",false,false, false, "");
+            dgvSched.DataSource = con.filterDGVSched("ALL","");
             dgvSched.Columns[8].Visible = false;
             cmbCity.SelectedIndex = -1;
             cmbBrgy.SelectedIndex = -1;
@@ -160,7 +172,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void cmbCity_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched(cmbCity.Text, true,false, false, "");
+            dgvSched.DataSource = con.filterDGVSched("CITY",cmbCity.Text);
             dgvSched.Columns[8].Visible = false;
             columnFormat();
             cmbBrgy.Enabled = true;
@@ -312,7 +324,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
                     {
                         con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());                      
                     }      
-                }            
+                }
                 //con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate); //UNCOMMENT FOR LIVE TESTING
             }
 
@@ -322,7 +334,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
             dgvLoad();
 
-            dgvSched.DataSource = con.filterDGVSched("", false,false, false, "");
+            dgvSched.DataSource = con.filterDGVSched("ALL","");
             dgvSched.Columns[8].Visible = false;
             cmbCity.SelectedIndex = -1;
             cmbDT.SelectedIndex = -1;
@@ -353,9 +365,8 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void cmbBrgy_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched(cmbBrgy.Text, true, true,false,"");
-            dgvSched.Columns[8].Visible = false;
-            columnFormat();
+            dgvSched.DataSource = con.filterDGVSched("BRGY",cmbBrgy.Text);
+            dgvSched.Columns[8].Visible = false;            columnFormat();
         }
 
         //view per item of invoice
@@ -376,7 +387,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void cmbInvcNum_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvLoad();
-            dgvSched.DataSource = con.filterDGVSched("", false, false, true, cmbInvcNum.Text);
+            dgvSched.DataSource = con.filterDGVSched("INVC",cmbInvcNum.Text);
             dgvSched.Columns[8].Visible = false;
             columnFormat();
         }
@@ -387,6 +398,14 @@ namespace Warehouse_Delivery_Sched_System.GUI
             //{
             //    dgvSched.SelectedRows[0].Cells[0].Value = dgvSched.SelectedRows[0].Cells[0].Value = false ? true : false;
             //}
+        }
+
+        private void cmbCUST_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvLoad();
+            dgvSched.DataSource = con.filterDGVSched("CUST", cmbCUST.Text);
+            dgvSched.Columns[8].Visible = false;
+            columnFormat();
         }
     }
 }

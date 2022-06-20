@@ -59,6 +59,8 @@
             this.lblPerCase = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbInvcNum = new System.Windows.Forms.ComboBox();
+            this.cmbCustID = new System.Windows.Forms.Label();
+            this.cmbCUST = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -95,10 +97,10 @@
             this.cmbDT.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDT.FormattingEnabled = true;
-            this.cmbDT.Location = new System.Drawing.Point(76, 424);
+            this.cmbDT.Location = new System.Drawing.Point(61, 423);
             this.cmbDT.Name = "cmbDT";
-            this.cmbDT.Size = new System.Drawing.Size(164, 32);
-            this.cmbDT.TabIndex = 4;
+            this.cmbDT.Size = new System.Drawing.Size(139, 32);
+            this.cmbDT.TabIndex = 5;
             this.cmbDT.SelectedIndexChanged += new System.EventHandler(this.cmbDT_SelectedIndexChanged);
             // 
             // lblDT
@@ -107,7 +109,7 @@
             this.lblDT.AutoSize = true;
             this.lblDT.BackColor = System.Drawing.Color.White;
             this.lblDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDT.Location = new System.Drawing.Point(72, 397);
+            this.lblDT.Location = new System.Drawing.Point(57, 396);
             this.lblDT.Name = "lblDT";
             this.lblDT.Size = new System.Drawing.Size(52, 24);
             this.lblDT.TabIndex = 2;
@@ -122,7 +124,7 @@
             this.cmbCity.Location = new System.Drawing.Point(134, 11);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(164, 32);
-            this.cmbCity.TabIndex = 1;
+            this.cmbCity.TabIndex = 100;
             this.cmbCity.SelectedIndexChanged += new System.EventHandler(this.cmbCity_SelectedIndexChanged);
             // 
             // label1
@@ -143,7 +145,7 @@
             this.lblCompany.BackColor = System.Drawing.Color.White;
             this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.ForeColor = System.Drawing.Color.Red;
-            this.lblCompany.Location = new System.Drawing.Point(284, 427);
+            this.lblCompany.Location = new System.Drawing.Point(279, 609);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(118, 24);
             this.lblCompany.TabIndex = 5;
@@ -288,7 +290,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(21, 427);
+            this.label4.Location = new System.Drawing.Point(6, 426);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 24);
             this.label4.TabIndex = 14;
@@ -299,10 +301,10 @@
             this.dtSchedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSchedDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtSchedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtSchedDate.Location = new System.Drawing.Point(18, 495);
+            this.dtSchedDate.Location = new System.Drawing.Point(9, 494);
             this.dtSchedDate.Name = "dtSchedDate";
             this.dtSchedDate.Size = new System.Drawing.Size(329, 29);
-            this.dtSchedDate.TabIndex = 5;
+            this.dtSchedDate.TabIndex = 6;
             // 
             // label5
             // 
@@ -310,7 +312,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(14, 468);
+            this.label5.Location = new System.Drawing.Point(5, 467);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(186, 24);
             this.label5.TabIndex = 16;
@@ -321,10 +323,10 @@
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.ForeColor = System.Drawing.Color.Green;
-            this.btnConfirm.Location = new System.Drawing.Point(76, 548);
+            this.btnConfirm.Location = new System.Drawing.Point(9, 547);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(216, 45);
-            this.btnConfirm.TabIndex = 6;
+            this.btnConfirm.TabIndex = 7;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
@@ -334,10 +336,10 @@
             this.btnViewSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnViewSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewSum.ForeColor = System.Drawing.Color.Green;
-            this.btnViewSum.Location = new System.Drawing.Point(76, 599);
+            this.btnViewSum.Location = new System.Drawing.Point(9, 598);
             this.btnViewSum.Name = "btnViewSum";
             this.btnViewSum.Size = new System.Drawing.Size(216, 45);
-            this.btnViewSum.TabIndex = 7;
+            this.btnViewSum.TabIndex = 99;
             this.btnViewSum.Text = "View Summary";
             this.btnViewSum.UseVisualStyleBackColor = true;
             this.btnViewSum.Click += new System.EventHandler(this.btnViewSum_Click);
@@ -362,7 +364,7 @@
             this.cmbBrgy.Location = new System.Drawing.Point(370, 11);
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(164, 32);
-            this.cmbBrgy.TabIndex = 17;
+            this.cmbBrgy.TabIndex = 101;
             this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             // 
             // label7
@@ -371,7 +373,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(244, 358);
+            this.label7.Location = new System.Drawing.Point(206, 426);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 24);
             this.label7.TabIndex = 20;
@@ -384,7 +386,7 @@
             this.lblPerCase.BackColor = System.Drawing.Color.Transparent;
             this.lblPerCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPerCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblPerCase.Location = new System.Drawing.Point(363, 345);
+            this.lblPerCase.Location = new System.Drawing.Point(325, 413);
             this.lblPerCase.Name = "lblPerCase";
             this.lblPerCase.Size = new System.Drawing.Size(39, 42);
             this.lblPerCase.TabIndex = 19;
@@ -396,7 +398,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(14, 358);
+            this.label8.Location = new System.Drawing.Point(6, 358);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 24);
             this.label8.TabIndex = 22;
@@ -409,11 +411,36 @@
             this.cmbInvcNum.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbInvcNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbInvcNum.FormattingEnabled = true;
-            this.cmbInvcNum.Location = new System.Drawing.Point(84, 355);
+            this.cmbInvcNum.Location = new System.Drawing.Point(70, 355);
             this.cmbInvcNum.Name = "cmbInvcNum";
-            this.cmbInvcNum.Size = new System.Drawing.Size(154, 32);
+            this.cmbInvcNum.Size = new System.Drawing.Size(130, 32);
             this.cmbInvcNum.TabIndex = 1;
             this.cmbInvcNum.SelectedIndexChanged += new System.EventHandler(this.cmbInvcNum_SelectedIndexChanged);
+            // 
+            // cmbCustID
+            // 
+            this.cmbCustID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbCustID.AutoSize = true;
+            this.cmbCustID.BackColor = System.Drawing.Color.Transparent;
+            this.cmbCustID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCustID.Location = new System.Drawing.Point(206, 358);
+            this.cmbCustID.Name = "cmbCustID";
+            this.cmbCustID.Size = new System.Drawing.Size(79, 24);
+            this.cmbCustID.TabIndex = 104;
+            this.cmbCustID.Text = "Cust ID :";
+            // 
+            // cmbCUST
+            // 
+            this.cmbCUST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbCUST.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbCUST.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCUST.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCUST.FormattingEnabled = true;
+            this.cmbCUST.Location = new System.Drawing.Point(291, 355);
+            this.cmbCUST.Name = "cmbCUST";
+            this.cmbCUST.Size = new System.Drawing.Size(140, 32);
+            this.cmbCUST.TabIndex = 4;
+            this.cmbCUST.SelectedIndexChanged += new System.EventHandler(this.cmbCUST_SelectedIndexChanged);
             // 
             // frmDelSched
             // 
@@ -421,6 +448,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1229, 656);
+            this.Controls.Add(this.cmbCustID);
+            this.Controls.Add(this.cmbCUST);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbInvcNum);
             this.Controls.Add(this.label7);
@@ -489,5 +518,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         public System.Windows.Forms.Label label8;
         public System.Windows.Forms.ComboBox cmbInvcNum;
+        public System.Windows.Forms.Label cmbCustID;
+        public System.Windows.Forms.ComboBox cmbCUST;
     }
 }

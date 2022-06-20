@@ -57,6 +57,8 @@
             this.cmbBrgy = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblPerCase = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbInvcNum = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -81,8 +83,10 @@
             this.dgvSched.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSched.Location = new System.Drawing.Point(10, 53);
             this.dgvSched.Name = "dgvSched";
+            this.dgvSched.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSched.Size = new System.Drawing.Size(1207, 283);
-            this.dgvSched.TabIndex = 0;
+            this.dgvSched.TabIndex = 2;
+            this.dgvSched.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvSched_KeyPress);
             // 
             // cmbDT
             // 
@@ -139,7 +143,7 @@
             this.lblCompany.BackColor = System.Drawing.Color.White;
             this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.ForeColor = System.Drawing.Color.Red;
-            this.lblCompany.Location = new System.Drawing.Point(263, 427);
+            this.lblCompany.Location = new System.Drawing.Point(284, 427);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(118, 24);
             this.lblCompany.TabIndex = 5;
@@ -177,10 +181,10 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvInsertDel.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvInsertDel.Location = new System.Drawing.Point(414, 342);
+            this.dgvInsertDel.Location = new System.Drawing.Point(445, 342);
             this.dgvInsertDel.Name = "dgvInsertDel";
             this.dgvInsertDel.ReadOnly = true;
-            this.dgvInsertDel.Size = new System.Drawing.Size(803, 302);
+            this.dgvInsertDel.Size = new System.Drawing.Size(772, 302);
             this.dgvInsertDel.TabIndex = 7;
             this.dgvInsertDel.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvInsertDel_UserDeletedRow);
             this.dgvInsertDel.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvInsertDel_UserDeletingRow);
@@ -210,7 +214,7 @@
             this.btnADD.Location = new System.Drawing.Point(540, 10);
             this.btnADD.Name = "btnADD";
             this.btnADD.Size = new System.Drawing.Size(93, 35);
-            this.btnADD.TabIndex = 2;
+            this.btnADD.TabIndex = 3;
             this.btnADD.Text = "ADD";
             this.btnADD.UseVisualStyleBackColor = true;
             this.btnADD.Click += new System.EventHandler(this.btnADD_Click);
@@ -367,11 +371,11 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(72, 356);
+            this.label7.Location = new System.Drawing.Point(244, 358);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(147, 24);
+            this.label7.Size = new System.Drawing.Size(113, 24);
             this.label7.TabIndex = 20;
-            this.label7.Text = "Per Case Count:";
+            this.label7.Text = "Case Count:";
             // 
             // lblPerCase
             // 
@@ -380,11 +384,36 @@
             this.lblPerCase.BackColor = System.Drawing.Color.Transparent;
             this.lblPerCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPerCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblPerCase.Location = new System.Drawing.Point(225, 340);
+            this.lblPerCase.Location = new System.Drawing.Point(363, 345);
             this.lblPerCase.Name = "lblPerCase";
             this.lblPerCase.Size = new System.Drawing.Size(39, 42);
             this.lblPerCase.TabIndex = 19;
             this.lblPerCase.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(14, 358);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 24);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Invc#: ";
+            // 
+            // cmbInvcNum
+            // 
+            this.cmbInvcNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbInvcNum.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbInvcNum.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbInvcNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbInvcNum.FormattingEnabled = true;
+            this.cmbInvcNum.Location = new System.Drawing.Point(84, 355);
+            this.cmbInvcNum.Name = "cmbInvcNum";
+            this.cmbInvcNum.Size = new System.Drawing.Size(154, 32);
+            this.cmbInvcNum.TabIndex = 1;
+            this.cmbInvcNum.SelectedIndexChanged += new System.EventHandler(this.cmbInvcNum_SelectedIndexChanged);
             // 
             // frmDelSched
             // 
@@ -392,6 +421,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1229, 656);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbInvcNum);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblPerCase);
             this.Controls.Add(this.label6);
@@ -456,5 +487,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shipName;
         private System.Windows.Forms.DataGridViewTextBoxColumn invcNbr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.ComboBox cmbInvcNum;
     }
 }

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory />
-    <InstallUrlHistory />
+    <PublishUrlHistory>D:\2. Working Projects\Warehouse-Delivery-Sched-System\published\</PublishUrlHistory>
+    <InstallUrlHistory>https://github.com/GheloHappy/Warehouse-Delivery-Sched-System/tree/master/published/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />

@@ -81,11 +81,17 @@ namespace Warehouse_Delivery_Sched_System.Class
         }
 
         //--------------------------------------------------------MDISERVER - MONHEIMAPP - a_Whse_Delivery_Sched_sys-------------------------------------------------------
-        public DataTable filterDGVSched(string strFilter, bool isFiltered, bool isFilteredBrgy)
+        public DataTable filterDGVSched(string strFilter, bool isFiltered, bool isFilteredBrgy,bool isFilteredInvc, string invcNbr)
         {
             connSL.Open();
 
-            if (!isFiltered && !isFilteredBrgy || strFilter == "")
+            if (isFilteredInvc)
+            {
+                sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr = '" + invcNbr + "' ORDER BY CancelDate ASC", connSL);
+                dt = new DataTable();
+                sda.Fill(dt);
+            }
+            else if (!isFiltered && !isFilteredBrgy || strFilter == "")
             {
                 sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys", connSL);
                 dt = new DataTable();
@@ -96,7 +102,7 @@ namespace Warehouse_Delivery_Sched_System.Class
                 sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE BARANGAY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
                 dt = new DataTable();
                 sda.Fill(dt);
-            }
+            }      
             else
             {
                 sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,CancelDate,Amount,Status,City,BARANGAY,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE CITY = '" + strFilter + "' ORDER BY CancelDate ASC", connSL);
@@ -110,7 +116,7 @@ namespace Warehouse_Delivery_Sched_System.Class
 
         public void fillcmbCity(ComboBox cmbCity)
         {
-            connOS.Open();
+            connSL.Open();
 
             sda = new SqlDataAdapter("SELECT DISTINCT CITY FROM a_Whse_Delivery_Sched_sys WHERE CITY IS NOT NULL AND CITY != ''", connSL);
             dt = new DataTable();
@@ -121,12 +127,12 @@ namespace Warehouse_Delivery_Sched_System.Class
                 cmbCity.Items.Add(row["CITY"].ToString());
             }
 
-            connOS.Close();
+            connSL.Close();
         }
 
         public void fillCmbBrgy(ComboBox cmbBrgy,string city)
         {
-            connOS.Open();
+            connSL.Open();
 
             sda = new SqlDataAdapter("SELECT DISTINCT Barangay FROM a_Whse_Delivery_Sched_sys WHERE CITY IS NOT NULL AND CITY != '' AND City = '"+ city+"'", connSL);
             dt = new DataTable();
@@ -137,7 +143,23 @@ namespace Warehouse_Delivery_Sched_System.Class
                 cmbBrgy.Items.Add(row["Barangay"].ToString());
             }
 
-            connOS.Close();
+            connSL.Close();
+        }
+
+        public void fillcmbInvc(ComboBox cmbInv)
+        {
+            connSL.Open();
+
+            sda = new SqlDataAdapter("SELECT InvcNbr FROM a_Whse_Delivery_Sched_sys", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                cmbInv.Items.Add(row["InvcNbr"].ToString());
+            }
+
+            connSL.Close();
         }
 
         //Update SOShipHeader when Live

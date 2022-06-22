@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbDT = new System.Windows.Forms.ComboBox();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.cmbTag = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSum)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +115,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(267, 576);
+            this.label5.Location = new System.Drawing.Point(242, 576);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 24);
             this.label5.TabIndex = 24;
@@ -125,10 +126,10 @@
             this.dtSchedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSchedDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtSchedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtSchedDate.Location = new System.Drawing.Point(344, 576);
+            this.dtSchedDate.Location = new System.Drawing.Point(319, 573);
             this.dtSchedDate.Name = "dtSchedDate";
             this.dtSchedDate.Size = new System.Drawing.Size(329, 29);
-            this.dtSchedDate.TabIndex = 22;
+            this.dtSchedDate.TabIndex = 52;
             // 
             // label1
             // 
@@ -136,7 +137,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 576);
+            this.label1.Location = new System.Drawing.Point(8, 576);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 24);
             this.label1.TabIndex = 23;
@@ -149,10 +150,10 @@
             this.cmbDT.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDT.FormattingEnabled = true;
-            this.cmbDT.Location = new System.Drawing.Point(77, 573);
+            this.cmbDT.Location = new System.Drawing.Point(63, 573);
             this.cmbDT.Name = "cmbDT";
             this.cmbDT.Size = new System.Drawing.Size(164, 32);
-            this.cmbDT.TabIndex = 21;
+            this.cmbDT.TabIndex = 51;
             // 
             // btnUpdate
             // 
@@ -160,13 +161,29 @@
             this.btnUpdate.BackColor = System.Drawing.Color.White;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.Green;
-            this.btnUpdate.Location = new System.Drawing.Point(725, 565);
+            this.btnUpdate.Location = new System.Drawing.Point(812, 565);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(216, 45);
-            this.btnUpdate.TabIndex = 25;
+            this.btnUpdate.Size = new System.Drawing.Size(144, 45);
+            this.btnUpdate.TabIndex = 54;
             this.btnUpdate.Text = "UPDATE";
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // cmbTag
+            // 
+            this.cmbTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbTag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbTag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTag.FormattingEnabled = true;
+            this.cmbTag.ItemHeight = 24;
+            this.cmbTag.Items.AddRange(new object[] {
+            "IN-TRANSIT",
+            "ON FLOOR"});
+            this.cmbTag.Location = new System.Drawing.Point(667, 573);
+            this.cmbTag.Name = "cmbTag";
+            this.cmbTag.Size = new System.Drawing.Size(139, 32);
+            this.cmbTag.TabIndex = 53;
             // 
             // frmViewSum
             // 
@@ -174,6 +191,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(968, 617);
+            this.Controls.Add(this.cmbTag);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dtSchedDate);
@@ -207,5 +225,6 @@
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.ComboBox cmbDT;
         private System.Windows.Forms.Button btnUpdate;
+        public System.Windows.Forms.ComboBox cmbTag;
     }
 }

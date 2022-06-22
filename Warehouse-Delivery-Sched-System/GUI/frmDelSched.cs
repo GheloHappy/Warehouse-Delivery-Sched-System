@@ -325,10 +325,10 @@ namespace Warehouse_Delivery_Sched_System.GUI
                         con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());                      
                     }      
                 }
-                //con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate); //UNCOMMENT FOR LIVE TESTING
-            }
+                con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, "IN-TRANSIT"); //UNCOMMENT FOR LIVE TESTING
 
-            con.insertLogs("Summary - " + selDT + " - " + selSchedDate, DateTime.Now.ToString());
+                con.insertLogs("Summary:" + selDT + " : " + cellInvc.Value.ToString() + " : " + selSchedDate, DateTime.Now.ToString());
+            }
 
             clearCheckedDGv();
 
@@ -390,6 +390,8 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvSched.DataSource = con.filterDGVSched("INVC",cmbInvcNum.Text);
             dgvSched.Columns[8].Visible = false;
             columnFormat();
+
+            lblShipVia.Text = con.showLblShipvia(cmbInvcNum.Text);
         }
 
         private void dgvSched_KeyPress(object sender, KeyPressEventArgs e)

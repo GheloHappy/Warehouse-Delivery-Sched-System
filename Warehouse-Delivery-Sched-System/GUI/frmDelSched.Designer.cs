@@ -61,6 +61,7 @@
             this.cmbInvcNum = new System.Windows.Forms.ComboBox();
             this.cmbCustID = new System.Windows.Forms.Label();
             this.cmbCUST = new System.Windows.Forms.ComboBox();
+            this.lblShipVia = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSched)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertDel)).BeginInit();
             this.SuspendLayout();
@@ -289,10 +290,10 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(6, 426);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 24);
+            this.label4.Size = new System.Drawing.Size(40, 24);
             this.label4.TabIndex = 14;
             this.label4.Text = "DT:";
             // 
@@ -373,7 +374,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(206, 426);
+            this.label7.Location = new System.Drawing.Point(257, 560);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 24);
             this.label7.TabIndex = 20;
@@ -386,7 +387,7 @@
             this.lblPerCase.BackColor = System.Drawing.Color.Transparent;
             this.lblPerCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPerCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblPerCase.Location = new System.Drawing.Point(325, 413);
+            this.lblPerCase.Location = new System.Drawing.Point(376, 547);
             this.lblPerCase.Name = "lblPerCase";
             this.lblPerCase.Size = new System.Drawing.Size(39, 42);
             this.lblPerCase.TabIndex = 19;
@@ -423,7 +424,7 @@
             this.cmbCustID.AutoSize = true;
             this.cmbCustID.BackColor = System.Drawing.Color.Transparent;
             this.cmbCustID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCustID.Location = new System.Drawing.Point(206, 358);
+            this.cmbCustID.Location = new System.Drawing.Point(206, 426);
             this.cmbCustID.Name = "cmbCustID";
             this.cmbCustID.Size = new System.Drawing.Size(79, 24);
             this.cmbCustID.TabIndex = 104;
@@ -436,11 +437,24 @@
             this.cmbCUST.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCUST.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCUST.FormattingEnabled = true;
-            this.cmbCUST.Location = new System.Drawing.Point(291, 355);
+            this.cmbCUST.Location = new System.Drawing.Point(291, 426);
             this.cmbCUST.Name = "cmbCUST";
             this.cmbCUST.Size = new System.Drawing.Size(140, 32);
             this.cmbCUST.TabIndex = 4;
             this.cmbCUST.SelectedIndexChanged += new System.EventHandler(this.cmbCUST_SelectedIndexChanged);
+            // 
+            // lblShipVia
+            // 
+            this.lblShipVia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblShipVia.AutoSize = true;
+            this.lblShipVia.BackColor = System.Drawing.Color.White;
+            this.lblShipVia.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShipVia.ForeColor = System.Drawing.Color.Red;
+            this.lblShipVia.Location = new System.Drawing.Point(206, 358);
+            this.lblShipVia.Name = "lblShipVia";
+            this.lblShipVia.Size = new System.Drawing.Size(52, 24);
+            this.lblShipVia.TabIndex = 105;
+            this.lblShipVia.Text = ".......";
             // 
             // frmDelSched
             // 
@@ -448,6 +462,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1229, 656);
+            this.Controls.Add(this.lblShipVia);
             this.Controls.Add(this.cmbCustID);
             this.Controls.Add(this.cmbCUST);
             this.Controls.Add(this.label8);
@@ -520,5 +535,6 @@
         public System.Windows.Forms.ComboBox cmbInvcNum;
         public System.Windows.Forms.Label cmbCustID;
         public System.Windows.Forms.ComboBox cmbCUST;
+        public System.Windows.Forms.Label lblShipVia;
     }
 }

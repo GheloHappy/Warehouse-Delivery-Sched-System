@@ -157,7 +157,7 @@ namespace Warehouse_Delivery_Sched_System.Class
         {
             connSL.Open();
 
-            sda = new SqlDataAdapter("SELECT InvcNbr FROM a_Whse_Delivery_Sched_sys", connSL);
+            sda = new SqlDataAdapter("SELECT LTRIM(RTRIM(InvcNbr)) AS InvcNbr FROM a_Whse_Delivery_Sched_sys", connSL);
             dt = new DataTable();
             sda.Fill(dt);
 
@@ -185,14 +185,24 @@ namespace Warehouse_Delivery_Sched_System.Class
         }
 
         //Update SOShipHeader when Live
-        public void updateSOShipHeader(string invcNbr, string shipvia,string ordDate)
+        public void updateSOShipHeader(string invcNbr, string shipvia,string ordDate,string tag)
         {
             connSL.Open();
 
-            using (cmd = new SqlCommand("UPDATE SOShipheader set User8='IT',orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='"+ invcNbr +"'", connSL))
+            if (tag == "IN-TRANSIT")
+            {
+                tag = "IT";
+            }
+            else
+            {
+                tag = "OF";
+            }
+
+            using (cmd = new SqlCommand("UPDATE SOShipheader set User8=@tag,orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='" + invcNbr +"'", connSL))
             {
                 cmd.Parameters.AddWithValue("@ordDate", ordDate);
                 cmd.Parameters.AddWithValue("@shipvia", shipvia);
+                cmd.Parameters.AddWithValue("@tag", tag);
                 cmd.ExecuteNonQuery();
             }
 
@@ -285,6 +295,26 @@ namespace Warehouse_Delivery_Sched_System.Class
             connOS.Close();
 
             return shipDesc;
+        }
+
+        string lblshipVia;
+        public string showLblShipvia(string invc)
+        {
+
+            connSL.Open();
+
+            sda = new SqlDataAdapter("SELECT ShipviaID FROM SOSHIPHEADER WHERE InvcNbr = '" + invc + "' ", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                lblshipVia = row["ShipviaID"].ToString();
+            }
+
+            connSL.Close();
+
+            return lblshipVia;
         }
 
         //--------------------------------------------------------MDISERVER-L - WhseSchedDelSys - TempInsertTable---------------------------------------------------------------

@@ -26,6 +26,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
             dgvSumLoad();
 
             con.fillcmbDT(cmbDT);
+            cmbTag.SelectedIndex = 1;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -48,8 +49,6 @@ namespace Warehouse_Delivery_Sched_System.GUI
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             updateSum();
-
-            con.insertLogs("Update Summary - " + selDT + " - " + selSchedDate, DateTime.Now.ToString());
         }
         string selSchedDate;
         string selDT;
@@ -72,7 +71,9 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
                         con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());
 
-                        //con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate); //UNCOMMENT FOR LIVE TESTING
+                        con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, cmbTag.Text); //UNCOMMENT FOR LIVE TESTING
+
+                        con.insertLogs("UPDATE:" + selDT + " : " + cellInvc.Value.ToString() + " : " + selSchedDate, DateTime.Now.ToString());
                     }
                 }
             }

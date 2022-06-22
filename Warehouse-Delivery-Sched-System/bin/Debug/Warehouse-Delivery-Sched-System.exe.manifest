@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Warehouse-Delivery-Sched-System.exe" size="1210320">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Warehouse-Delivery-Sched-System.exe" size="1211856">
       <assemblyIdentity name="Warehouse-Delivery-Sched-System" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MOIG7cZqv80AXFF36dhlZR3Fz4tKSpcqReYmDYjOgzg=</dsig:DigestValue>
+        <dsig:DigestValue>hUEOL3muJ+jriAy903rE5SfI8GYGA0NKGmblMhfmOHQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

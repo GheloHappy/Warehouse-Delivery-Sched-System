@@ -89,7 +89,6 @@
             this.dgvSched.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSched.Size = new System.Drawing.Size(1207, 283);
             this.dgvSched.TabIndex = 2;
-            this.dgvSched.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvSched_KeyPress);
             // 
             // cmbDT
             // 
@@ -126,6 +125,7 @@
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(164, 32);
             this.cmbCity.TabIndex = 100;
+            this.cmbCity.Visible = false;
             this.cmbCity.SelectedIndexChanged += new System.EventHandler(this.cmbCity_SelectedIndexChanged);
             // 
             // label1
@@ -138,6 +138,7 @@
             this.label1.Size = new System.Drawing.Size(56, 24);
             this.label1.TabIndex = 4;
             this.label1.Text = "CITY:";
+            this.label1.Visible = false;
             // 
             // lblCompany
             // 
@@ -146,7 +147,7 @@
             this.lblCompany.BackColor = System.Drawing.Color.White;
             this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.ForeColor = System.Drawing.Color.Red;
-            this.lblCompany.Location = new System.Drawing.Point(279, 609);
+            this.lblCompany.Location = new System.Drawing.Point(279, 620);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(118, 24);
             this.lblCompany.TabIndex = 5;
@@ -355,6 +356,7 @@
             this.label6.Size = new System.Drawing.Size(53, 24);
             this.label6.TabIndex = 18;
             this.label6.Text = "Brgy:";
+            this.label6.Visible = false;
             // 
             // cmbBrgy
             // 
@@ -366,6 +368,7 @@
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(164, 32);
             this.cmbBrgy.TabIndex = 101;
+            this.cmbBrgy.Visible = false;
             this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             // 
             // label7
@@ -374,7 +377,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(257, 560);
+            this.label7.Location = new System.Drawing.Point(279, 543);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 24);
             this.label7.TabIndex = 20;
@@ -387,7 +390,7 @@
             this.lblPerCase.BackColor = System.Drawing.Color.Transparent;
             this.lblPerCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPerCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblPerCase.Location = new System.Drawing.Point(376, 547);
+            this.lblPerCase.Location = new System.Drawing.Point(299, 567);
             this.lblPerCase.Name = "lblPerCase";
             this.lblPerCase.Size = new System.Drawing.Size(39, 42);
             this.lblPerCase.TabIndex = 19;
@@ -404,6 +407,7 @@
             this.label8.Size = new System.Drawing.Size(64, 24);
             this.label8.TabIndex = 22;
             this.label8.Text = "Invc#: ";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // cmbInvcNum
             // 

@@ -121,9 +121,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(120, 159);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 13;
-            this.label1.Text = "v1.5";
+            this.label1.Text = "v1.6.1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // frmLogin

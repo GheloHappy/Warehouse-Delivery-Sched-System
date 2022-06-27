@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Warehouse_Delivery_Sched_System.Class
 {
@@ -213,7 +214,7 @@ namespace Warehouse_Delivery_Sched_System.Class
         //Insert per item in temptable -----------------frmItemList
 
         //public int itemIndex = 0;
-        public void showItemsSelected(DataGridView dgvItems,string invcNbr)
+        public void showItemsSelected(string invcNbr)
         {
             connSL.Open();
             conn.Open();
@@ -326,6 +327,28 @@ namespace Warehouse_Delivery_Sched_System.Class
             conn.Close();
         }
 
+        //----------------------------------MULTI INVOICE
+        public bool findInvc(string invcNbr)
+        {
+            connSL.Open();
+
+            sda = new SqlDataAdapter("SELECT LTRIM(RTRIM(ShipName)) As ShipName,LTRIM(RTRIM(InvcNbr)) AS InvcNbr," +
+                "Amount,QtyInCase FROM a_Whse_Delivery_Sched_sys WHERE InvcNbr = '" + invcNbr + "'", connSL);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row != null)
+                {
+                    insertToTempTbl(row["InvcNbr"].ToString(), row["ShipName"].ToString(), Convert.ToDouble(row["Amount"].ToString()), Int32.Parse(row["QtyInCase"].ToString()));
+                }
+            }
+
+            connSL.Close();
+            return false;
+        }
+
         int toggle;
 
         public bool insertToTempTbl(string invcNbr, string shipName, double amt, int QtyInCase)
@@ -371,6 +394,18 @@ namespace Warehouse_Delivery_Sched_System.Class
             }
             conn.Close();
             return false;
+        }
+
+        public DataTable filldgvInsertDel()
+        {
+            conn.Open();
+
+            sda = new SqlDataAdapter("SELECT InvcNbr,ShipName,Amount FROM TempInsertTable", conn);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+            conn.Close();
+            return dt;
         }
 
         public void deleteTempInvcID(string invcNbr)

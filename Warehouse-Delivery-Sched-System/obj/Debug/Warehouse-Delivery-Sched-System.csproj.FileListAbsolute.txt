@@ -16,3 +16,4 @@ D:\2. Working Projects\Warehouse-Delivery-Sched-System\Warehouse-Delivery-Sched-
 D:\2. Working Projects\Warehouse-Delivery-Sched-System\Warehouse-Delivery-Sched-System\bin\Debug\Warehouse-Delivery-Sched-System.application
 D:\2. Working Projects\Warehouse-Delivery-Sched-System\Warehouse-Delivery-Sched-System\obj\Debug\Warehouse-Delivery-Sched-System.exe.manifest
 D:\2. Working Projects\Warehouse-Delivery-Sched-System\Warehouse-Delivery-Sched-System\obj\Debug\Warehouse-Delivery-Sched-System.application
+D:\2. Working Projects\Warehouse-Delivery-Sched-System\Warehouse-Delivery-Sched-System\obj\Debug\Warehouse_Delivery_Sched_System.GUI.frmMultiInvc.resources

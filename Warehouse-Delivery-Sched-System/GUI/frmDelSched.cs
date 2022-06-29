@@ -126,7 +126,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
                         if (con.insertToTempTbl(cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), Int32.Parse(cellPerCase.Value.ToString())) == true)
                         {
-                            MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " Already added.");
+                            MessageBox.Show($"Invoice - {cellInvc.Value.ToString().Trim()} Already added.");
                         }
                         else
                         {
@@ -290,20 +290,12 @@ namespace Warehouse_Delivery_Sched_System.GUI
                 DataGridViewCell cellAmt = row.Cells[2];
 
 
-                if (con.insertSummary(selDT, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), selSchedDate) == true)
+                if (!con.insertSummary(selDT, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), selSchedDate))
                 {
-                    countResult = MessageBox.Show("Invoice - " + cellInvc.Value.ToString().Trim() + " is Already Scheduled on " +
-                        selSchedDate + " - " + cellShipID.Value.ToString().Trim() + ". Do you want to update DT?", 
-                        "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    
-                    if (countResult == DialogResult.Yes)
-                    {
-                        con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());                      
-                    }      
-                }
-                con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, "IN-TRANSIT"); //UNCOMMENT FOR LIVE TESTING
+                    con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, "IN-TRANSIT"); //UNCOMMENT FOR LIVE TESTING
 
-                con.insertLogs("Summary:" + selDT + " : " + cellInvc.Value.ToString() + " : " + selSchedDate, DateTime.Now.ToString());
+                    con.insertLogs($"Summary: {selDT} : {cellInvc.Value.ToString()} : {selSchedDate}", DateTime.Now.ToString());
+                }
             }
 
             clearCheckedDGv();

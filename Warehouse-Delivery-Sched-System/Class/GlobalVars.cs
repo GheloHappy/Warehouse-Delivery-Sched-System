@@ -10,8 +10,9 @@ namespace Warehouse_Delivery_Sched_System.Class
     {
         public static Connection con = new Class.Connection();
 
-        public static string strCompany;
+        public static string strCompany { get; set; }
 
-        public static string strUserName;
+        public static string strUserName { get; set; }
+
     }
 }

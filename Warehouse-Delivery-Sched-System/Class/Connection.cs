@@ -43,13 +43,13 @@ namespace Warehouse_Delivery_Sched_System.Class
                 dbName = "CENTROAPP";
             }
 
-            conSL = "server=" + serverName + ";user id=" + "sa" + ";password=" + "Passw0rd" + ";database=" + dbName;
+            conSL = $"server={serverName};user id=sa;password=Passw0rd;database={dbName}";
             connSL = new SqlConnection(conSL);
 
-            conDashL = "server=" + "mdiserver-l" + ";user id=" + "sa" + ";password=" + "Passw0rd" + ";database=" + "WhseSchedDelSys";
+            conDashL = "server=mdiserver-l;user id=sa;password=Passw0rd;database=WhseSchedDelSys";
             conn = new SqlConnection(conDashL);
 
-            conOpenShip = "server=" + "mdiserver" + ";user id=" + "sa" + ";password=" + "Passw0rd" + ";database=" + "dbOpenShippers";
+            conOpenShip = "server=mdiserver;user id=sa;password=Passw0rd;database=dbOpenShippers";
             connOS = new SqlConnection(conOpenShip);
 
             Class.GlobalVars.strCompany = company;
@@ -191,21 +191,15 @@ namespace Warehouse_Delivery_Sched_System.Class
             connSL.Open();
 
             if (tag == "IN-TRANSIT")
-            {
                 tag = "IT";
-            }
             else
-            {
                 tag = "OF";
-            }
 
             using (cmd = new SqlCommand("UPDATE SOShipheader set User8=@tag,orddate=@ordDate,shipviaid=@shipvia WHERE invcnbr='" + invcNbr +"'", connSL))
-            {
                 cmd.Parameters.AddWithValue("@ordDate", ordDate);
                 cmd.Parameters.AddWithValue("@shipvia", shipvia);
                 cmd.Parameters.AddWithValue("@tag", tag);
                 cmd.ExecuteNonQuery();
-            }
 
             connSL.Close();
         }
@@ -225,16 +219,11 @@ namespace Warehouse_Delivery_Sched_System.Class
 
             foreach (DataRow row in dt.Rows)
             {
-                //dgvItems.Rows.Insert(itemIndex, row["InvtID"].ToString(), row["Descr"].ToString(), row["QtyInCase"].ToString());
-                //itemIndex++;
-
                 using (cmd = new SqlCommand("INSERT INTO TempInsertTableItems VALUES(@InvtID,@Descr,@QtyInCase)", conn))
-                {
                     cmd.Parameters.AddWithValue("@InvtID", row["InvtID"].ToString());
                     cmd.Parameters.AddWithValue("@Descr", row["Descr"].ToString());
                     cmd.Parameters.AddWithValue("@QtyInCase", row["QtyInCase"].ToString());
                     cmd.ExecuteNonQuery();
-                }
             }
 
             conn.Close();
@@ -384,13 +373,11 @@ namespace Warehouse_Delivery_Sched_System.Class
             if (toggle == 1)
             {
                 using (cmd = new SqlCommand("INSERT INTO TempInsertTable VALUES(@invcNbr,@shipName,@amt,@QtyInCase)", conn))
-                {
                     cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
                     cmd.Parameters.AddWithValue("@shipName", shipName);
                     cmd.Parameters.AddWithValue("@amt", amt);
                     cmd.Parameters.AddWithValue("@QtyInCase", QtyInCase);
                     cmd.ExecuteNonQuery();
-                }
             }
             conn.Close();
             return false;
@@ -495,14 +482,12 @@ namespace Warehouse_Delivery_Sched_System.Class
             if (insSumToggle == true)
             {
                 using (cmd = new SqlCommand("INSERT INTO Summary VALUES(@shipVia,@invcNbr,@shipName,@amt,@schedDate)", conn))
-                {
                     cmd.Parameters.AddWithValue("@shipVia", shipVia);
                     cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
                     cmd.Parameters.AddWithValue("@shipName", shipName);
                     cmd.Parameters.AddWithValue("@amt", amt);
                     cmd.Parameters.AddWithValue("@schedDate", date);
                     cmd.ExecuteNonQuery();
-                }
             }
 
 
@@ -516,12 +501,10 @@ namespace Warehouse_Delivery_Sched_System.Class
             conn.Open();
 
             using (cmd = new SqlCommand("UPDATE Summary SET shipViaID=@shipvia,ScheduleDate=@schedDate WHERE InvcNbr=@invcNbr ", conn))
-            {
                 cmd.Parameters.AddWithValue("@shipVia", shipVia);
                 cmd.Parameters.AddWithValue("@schedDate", date);
                 cmd.Parameters.AddWithValue("@invcNbr", invcNbr);
                 cmd.ExecuteNonQuery();
-            }
 
             conn.Close();
         }
@@ -590,11 +573,6 @@ namespace Warehouse_Delivery_Sched_System.Class
             return dt;
         }
 
-        public void updateSum()
-        {
-
-        }
-
         //----------------------------------LOGS
 
         public void insertLogs(string trans, string dateTime)
@@ -602,12 +580,10 @@ namespace Warehouse_Delivery_Sched_System.Class
             conn.Open();
 
             using (cmd = new SqlCommand("INSERT INTO Logs VALUES(@UserName,@Trans,@DateTime)", conn))
-            {
                 cmd.Parameters.AddWithValue("@UserName", GlobalVars.strUserName);
                 cmd.Parameters.AddWithValue("@Trans", trans);
                 cmd.Parameters.AddWithValue("@DateTime", dateTime);
                 cmd.ExecuteNonQuery();
-            }
 
             conn.Close();
         }

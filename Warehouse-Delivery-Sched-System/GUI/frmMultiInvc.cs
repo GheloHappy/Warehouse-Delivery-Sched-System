@@ -25,17 +25,11 @@ namespace Warehouse_Delivery_Sched_System.GUI
                 DataGridViewCell cellInvc = row.Cells[0];
 
                 if (cellInvc.Value != null)
-                {
-                    //MessageBox.Show(cellInvc.Value.ToString());
+
                     if(con.findInvc(cellInvc.Value.ToString()))
-                    {
                         MessageBox.Show(cellInvc.Value.ToString() + " Already Added!");
-                    }
                     else
-                    {
                         this.Close();
-                    }
-                }
             }
         }
     }

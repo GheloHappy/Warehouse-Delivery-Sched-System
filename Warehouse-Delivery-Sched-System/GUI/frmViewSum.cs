@@ -73,7 +73,7 @@ namespace Warehouse_Delivery_Sched_System.GUI
 
                         con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, cmbTag.Text); //UNCOMMENT FOR LIVE TESTING
 
-                        con.insertLogs("UPDATE:" + selDT + " : " + cellInvc.Value.ToString() + " : " + selSchedDate, DateTime.Now.ToString());
+                        con.insertLogs($"UPDATE: {selDT} : {cellInvc.Value.ToString()} : {selSchedDate}", DateTime.Now.ToString());
                     }
                 }
             }

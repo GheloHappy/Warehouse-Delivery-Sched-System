@@ -62,7 +62,7 @@ namespace Warehouse_Delivery_Sched_System
             }
             else
             {
-                MessageBox.Show("Login Failed!, Check username and   password or select Company");
+                MessageBox.Show("Login Failed!, Check username and password or select Company");
             }
         }
 

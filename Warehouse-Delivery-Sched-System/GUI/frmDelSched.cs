@@ -290,12 +290,14 @@ namespace Warehouse_Delivery_Sched_System.GUI
                 DataGridViewCell cellAmt = row.Cells[2];
 
 
-                if (!con.insertSummary(selDT, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), selSchedDate))
+                if (con.insertSummary(selDT, cellInvc.Value.ToString(), cellShipID.Value.ToString(), Convert.ToDouble(cellAmt.Value), selSchedDate))
                 {
-                    con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, "IN-TRANSIT"); //UNCOMMENT FOR LIVE TESTING
-
-                    con.insertLogs($"Summary: {selDT} : {cellInvc.Value.ToString()} : {selSchedDate}", DateTime.Now.ToString());
+                    con.updateSummary(selDT, selSchedDate, cellInvc.Value.ToString());
+                    con.insertLogs($"UPDATE-SUMMARY: {selDT} : {cellInvc.Value.ToString()} : {selSchedDate}", DateTime.Now.ToString());
                 }
+
+                con.updateSOShipHeader(cellInvc.Value.ToString(), selDT, selSchedDate, "IN-TRANSIT"); //UNCOMMENT FOR LIVE TESTING
+                con.insertLogs($"Summary: {selDT} : {cellInvc.Value.ToString()} : {selSchedDate}", DateTime.Now.ToString());
             }
 
             clearCheckedDGv();
